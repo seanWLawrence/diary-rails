@@ -1,0 +1,2 @@
+backend: bundle exec rails server
+frontend: yarn && ./bin/webpack-dev-server
