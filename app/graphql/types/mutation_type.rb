@@ -1,5 +1,5 @@
 module Types
   class MutationType < Types::BaseObject
-    field :create_entry, mutation: Mutations::CreateEntry
+    field :upsert_entry, mutation: Mutations::UpsertEntry
   end
 end

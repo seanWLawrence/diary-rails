@@ -1,8 +1,9 @@
 module Mutations
-  class CreateEntry < Mutations::BaseMutation
+  class UpsertEntry < Mutations::BaseMutation
+    argument :entry_id, ID, required: false
     argument :gratitudes, [String], required: true
     argument :goals, [String], required: true
-    argument :affirmation, String, required: true
+    argument :affirmations, [String], required: true
     argument :positive_experiences, [String], required: false
     argument :improvements, [String], required: false
 
@@ -11,22 +12,28 @@ module Mutations
     field :entry, Types::Entry, null: true
 
     def resolve(
+      entry_id: nil,
       gratitudes:,
       goals:,
-      affirmation:,
-      positive_experiences:,
-      improvements:
+      affirmations: [],
+      positive_experiences: [],
+      improvements: []
     )
-      entry = Entry.new
+      params = {
+        gratitudes: gratitudes,
+        goals: goals,
+        affirmations: affirmations,
+        positive_experiences: positive_experiences,
+        improvements: improvements
+      }
 
-      # Required
-      entry.gratitudes.build(gratitudes.map { |body| { body: body } })
-      entry.goals.build(goals.map { |body| { body: body } })
-      entry.build_affirmation body: affirmation
+      if entry_id
+        entry = Entry.find_by id: entry_id
 
-      # Not required
-      entry.positive_experiences.build(positive_experiences.map { |body| { body: body } })
-      entry.improvements.build(improvements.map { |body| { body: body } })
+        entry.update params
+      else
+        entry = Entry.new params
+      end
 
       if entry.save
         {
