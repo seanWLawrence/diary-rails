@@ -28,11 +28,11 @@ module Mutations
       }
 
       if entry_id
-        entry = ::Entry.find_by id: entry_id
+        entry = Entry.find_by id: entry_id
 
         entry&.update params
       else
-        entry = ::Entry.new params
+        entry = Entry.new params
       end
 
       if entry && entry&.save
