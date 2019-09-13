@@ -105,6 +105,9 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 9
 
+Metrics/ParameterLists:
+  Max: 10
+
 # Offense count: 1
 # Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
 # AllowedNames: io, id, to, by, on, in, at, ip, db
