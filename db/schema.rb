@@ -10,56 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_12_150824) do
+ActiveRecord::Schema.define(version: 2019_09_12_150436) do
 
-  create_table "affirmations", force: :cascade do |t|
-    t.text "body", null: false
-    t.integer "entry_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["entry_id"], name: "index_affirmations_on_entry_id"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "entries", force: :cascade do |t|
+    t.string "gratitudes", default: [], array: true
+    t.string "goals", default: [], array: true
+    t.string "affirmations", default: [], array: true
+    t.string "improvements", default: [], array: true
+    t.string "positive_experiences", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "goals", force: :cascade do |t|
-    t.text "body", null: false
-    t.integer "entry_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["entry_id"], name: "index_goals_on_entry_id"
-  end
-
-  create_table "gratitudes", force: :cascade do |t|
-    t.text "body", null: false
-    t.integer "entry_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["entry_id"], name: "index_gratitudes_on_entry_id"
-  end
-
-  create_table "improvements", force: :cascade do |t|
-    t.text "body", null: false
-    t.integer "entry_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["entry_id"], name: "index_improvements_on_entry_id"
-  end
-
-  create_table "positive_experiences", force: :cascade do |t|
-    t.text "body", null: false
-    t.integer "entry_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["entry_id"], name: "index_positive_experiences_on_entry_id"
-  end
-
-  add_foreign_key "affirmations", "entries"
-  add_foreign_key "goals", "entries"
-  add_foreign_key "gratitudes", "entries"
-  add_foreign_key "improvements", "entries"
-  add_foreign_key "positive_experiences", "entries"
 end
