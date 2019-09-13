@@ -28,14 +28,14 @@ module Mutations
       }
 
       if entry_id
-        entry = Entry.find_by id: entry_id
+        entry = ::Entry.find_by id: entry_id
 
-        entry.update params
+        entry&.update params
       else
-        entry = Entry.new params
+        entry = ::Entry.new params
       end
 
-      if entry.save
+      if entry && entry&.save
         {
           success: true,
           entry: entry,
@@ -45,7 +45,7 @@ module Mutations
         {
           success: false,
           entry: nil,
-          errors: entry.errors.full_messages
+          errors: entry&.errors&.full_messages
         }
       end
     end
