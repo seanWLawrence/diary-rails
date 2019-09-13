@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-let Entries = () => <h1>Entries</h1>;
+import { Entries } from '../pages/entries';
 
 const client = new ApolloClient({
   uri: '/graphql',
