@@ -8,6 +8,7 @@
     "@rails/activestorage": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.7",
+    "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^4.3.5",
@@ -24,11 +25,12 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.1.0",
     "cypress": "^3.4.1",
     "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
-    "start": "foreman start -f Procfile.dev -p 3000",
-    "test": "cypress open"
+    "start": "make start",
+    "test": "make test-start"
   }
 }

@@ -15,7 +15,8 @@
     "**/*.spec.ts",
     "node_modules",
     "vendor",
-    "public"
+    "public",
+    "cypress"
   ],
   "compileOnSave": false
 }
