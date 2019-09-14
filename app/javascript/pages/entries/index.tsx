@@ -45,6 +45,8 @@ export let Entries: FC<{}> = () => {
 
   let { entries } = data;
 
+  let allEntriesOpen = entriesOpen.length === entries.length;
+
   return (
     <main className="main__wrapper">
       <h1 className="title">
@@ -60,25 +62,27 @@ export let Entries: FC<{}> = () => {
       </nav>
 
       <button
+        className="entries__toggle-collpase-button"
         onClick={() =>
-          toggleEntriesOpen(
-            entriesOpen.length === 0 ? entries.map(e => e.id) : []
-          )
+          toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
         }
       >
-        {entriesOpen.length === 0 ? 'Open all +' : 'Collapse all -'}
+        {allEntriesOpen ? 'Collapse all -' : 'Open all +'}
       </button>
 
       {entries.map(
-        ({
-          dateCreated,
-          gratitudes,
-          goals,
-          affirmations,
-          positiveExperiences,
-          improvements,
-          id,
-        }) => {
+        (
+          {
+            dateCreated,
+            gratitudes,
+            goals,
+            affirmations,
+            positiveExperiences,
+            improvements,
+            id,
+          },
+          index
+        ) => {
           let isOpen = entriesOpen.includes(id);
 
           return (
@@ -98,34 +102,60 @@ export let Entries: FC<{}> = () => {
 
               {isOpen && (
                 <div>
-                  <h2 className="entry__title">I'm grateful for</h2>
+                  <h2 className="entry__title">Estoy agradecido por...</h2>
                   {gratitudes.map((gratitude: string, index: number) => {
-                    return <p key={index}>{gratitude}</p>;
+                    return (
+                      <p key={index} className="entry__text">
+                        {gratitude}
+                      </p>
+                    );
                   })}
 
-                  <h2>Today I'm doing</h2>
+                  <h2 className="entry__title">¿Qué haría grandioso hoy?</h2>
                   {goals.map((goal: string, index: number) => {
-                    return <p key={index}>{goal}</p>;
+                    return (
+                      <p key={index} className="entry__text">
+                        {goal}
+                      </p>
+                    );
                   })}
 
-                  <h2>I'm a</h2>
+                  <h2 className="entry__title">Estoy...</h2>
                   {affirmations.map((affirmation: string, index: number) => {
-                    return <p key={index}>{affirmation}</p>;
+                    return (
+                      <p key={index} className="entry__text">
+                        {affirmation}
+                      </p>
+                    );
                   })}
 
-                  <h2>Was great today when</h2>
+                  <h2 className="entry__title">
+                    Cosas increíbles que sucedieron hoy...
+                  </h2>
                   {positiveExperiences.map(
                     (positiveExperience: string, index: number) => {
-                      return <p key={index}>{positiveExperience}</p>;
+                      return (
+                        <p key={index} className="entry__text">
+                          {positiveExperience}
+                        </p>
+                      );
                     }
                   )}
 
-                  <h2>Will improve on</h2>
+                  <h2 className="entry__title">
+                    ¿Cómo podría haber mejorado aún más hoy?
+                  </h2>
                   {improvements.map((improvement: string, index: number) => {
-                    return <p key={index}>{improvement}</p>;
+                    return (
+                      <p key={index} className="entry__text">
+                        {improvement}
+                      </p>
+                    );
                   })}
                 </div>
               )}
+
+              {allEntriesOpen && <hr className="entry__divider" />}
             </section>
           );
         }
