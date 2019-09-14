@@ -66,7 +66,7 @@ export let Entries: FC<{}> = () => {
           )
         }
       >
-        {entriesOpen.length === 0 ? 'Open all +' : 'Collapse all −'}
+        {entriesOpen.length === 0 ? 'Open all +' : 'Collapse all -'}
       </button>
 
       {entries.map(
@@ -93,7 +93,7 @@ export let Entries: FC<{}> = () => {
                   )
                 }
               >
-                {dateCreated} {isOpen ? '−' : '+'}
+                {dateCreated} {isOpen ? '-' : '+'}
               </button>
 
               {isOpen && (
