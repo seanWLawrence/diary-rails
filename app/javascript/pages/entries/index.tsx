@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import { Link } from 'react-router-dom';
+
+import './index.css';
 
 let ENTRIES_QUERY = gql`
   query EntriesQuery {
@@ -43,7 +46,12 @@ export let Entries: FC<{}> = () => {
 
   return (
     <main>
-      <h1>Entries</h1>
+      <h1>Diario de 5 minutos</h1>
+
+      <nav>
+        <Link to="/entries">entradas</Link>
+        <Link to="/entries/new">nueva entrada</Link>
+      </nav>
 
       {entries.map(
         ({
