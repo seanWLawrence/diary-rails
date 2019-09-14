@@ -61,9 +61,9 @@ export let Entries: FC<{}> = () => {
 
       <button
         onClick={() =>
-          entriesOpen.length === 0
-            ? toggleEntriesOpen(entries.map(e => e.id))
-            : toggleEntriesOpen([])
+          toggleEntriesOpen(
+            entriesOpen.length === 0 ? entries.map(e => e.id) : []
+          )
         }
       >
         {entriesOpen.length === 0 ? 'Open all' : 'Collapse all'}
@@ -87,9 +87,9 @@ export let Entries: FC<{}> = () => {
               <button
                 onClick={() =>
                   toggleEntriesOpen(
-                    entriesOpen.length > 0
+                    isOpen
                       ? entriesOpen.filter(entryId => entryId !== id)
-                      : []
+                      : [...entriesOpen, id]
                   )
                 }
               >
