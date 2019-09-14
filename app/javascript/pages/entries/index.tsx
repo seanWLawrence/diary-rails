@@ -66,7 +66,7 @@ export let Entries: FC<{}> = () => {
           )
         }
       >
-        {entriesOpen.length === 0 ? 'Open all' : 'Collapse all'}
+        {entriesOpen.length === 0 ? 'Open all +' : 'Collapse all −'}
       </button>
 
       {entries.map(
@@ -83,18 +83,20 @@ export let Entries: FC<{}> = () => {
 
           return (
             <section key={id} className="entry__wrapper">
-              <h2 className="entry__date">{dateCreated}</h2>
-              <button
-                onClick={() =>
-                  toggleEntriesOpen(
-                    isOpen
-                      ? entriesOpen.filter(entryId => entryId !== id)
-                      : [...entriesOpen, id]
-                  )
-                }
-              >
-                {isOpen ? 'close' : 'open'}
-              </button>
+              <h2 className="entry__date">
+                {dateCreated}{' '}
+                <button
+                  onClick={() =>
+                    toggleEntriesOpen(
+                      isOpen
+                        ? entriesOpen.filter(entryId => entryId !== id)
+                        : [...entriesOpen, id]
+                    )
+                  }
+                >
+                  {isOpen ? '−' : '+'}
+                </button>
+              </h2>
 
               {isOpen && (
                 <div>
