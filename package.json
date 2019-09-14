@@ -24,9 +24,11 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "cypress": "^3.4.1",
     "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
-    "start": "foreman start -f Procfile.dev -p 3000"
+    "start": "foreman start -f Procfile.dev -p 3000",
+    "test": "cypress open"
   }
 }
