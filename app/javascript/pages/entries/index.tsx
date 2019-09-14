@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
@@ -33,6 +33,7 @@ interface EntriesData {
 
 export let Entries: FC<{}> = () => {
   let { loading, error, data } = useQuery<EntriesData>(ENTRIES_QUERY);
+  let [entriesOpen, toggleEntriesOpen] = useState([]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -45,14 +46,28 @@ export let Entries: FC<{}> = () => {
   let { entries } = data;
 
   return (
-    <main>
-      <h1>
-        <Link to="/entries">Diario de 5 minutos</Link>
+    <main className="main__wrapper">
+      <h1 className="title">
+        <Link to="/entries" className="title__anchor">
+          Diario de 5 minutos
+        </Link>
       </h1>
 
-      <nav>
-        <Link to="/entries/new">nueva entrada</Link>
+      <nav className="nav">
+        <Link to="/entries/new" className="nav__anchor">
+          nueva entrada
+        </Link>
       </nav>
+
+      <button
+        onClick={() =>
+          entriesOpen.length === 0
+            ? toggleEntriesOpen(entries.map(e => e.id))
+            : toggleEntriesOpen([])
+        }
+      >
+        {entriesOpen.length === 0 ? 'Open all' : 'Collapse all'}
+      </button>
 
       {entries.map(
         ({
@@ -64,36 +79,54 @@ export let Entries: FC<{}> = () => {
           improvements,
           id,
         }) => {
+          let isOpen = entriesOpen.includes(id);
+
           return (
-            <div key={id}>
-              <h2>{dateCreated}</h2>
-              <h2>I'm grateful for</h2>
-              {gratitudes.map((gratitude: string, index: number) => {
-                return <p key={index}>{gratitude}</p>;
-              })}
-
-              <h2>Today I'm doing</h2>
-              {goals.map((goal: string, index: number) => {
-                return <p key={index}>{goal}</p>;
-              })}
-
-              <h2>I'm a</h2>
-              {affirmations.map((affirmation: string, index: number) => {
-                return <p key={index}>{affirmation}</p>;
-              })}
-
-              <h2>Was great today when</h2>
-              {positiveExperiences.map(
-                (positiveExperience: string, index: number) => {
-                  return <p key={index}>{positiveExperience}</p>;
+            <section key={id} className="entry__wrapper">
+              <h2 className="entry__date">{dateCreated}</h2>
+              <button
+                onClick={() =>
+                  toggleEntriesOpen(
+                    entriesOpen.length > 0
+                      ? entriesOpen.filter(entryId => entryId !== id)
+                      : []
+                  )
                 }
-              )}
+              >
+                {isOpen ? 'close' : 'open'}
+              </button>
 
-              <h2>Will improve on</h2>
-              {improvements.map((improvement: string, index: number) => {
-                return <p key={index}>{improvement}</p>;
-              })}
-            </div>
+              {isOpen && (
+                <div>
+                  <h2 className="entry__title">I'm grateful for</h2>
+                  {gratitudes.map((gratitude: string, index: number) => {
+                    return <p key={index}>{gratitude}</p>;
+                  })}
+
+                  <h2>Today I'm doing</h2>
+                  {goals.map((goal: string, index: number) => {
+                    return <p key={index}>{goal}</p>;
+                  })}
+
+                  <h2>I'm a</h2>
+                  {affirmations.map((affirmation: string, index: number) => {
+                    return <p key={index}>{affirmation}</p>;
+                  })}
+
+                  <h2>Was great today when</h2>
+                  {positiveExperiences.map(
+                    (positiveExperience: string, index: number) => {
+                      return <p key={index}>{positiveExperience}</p>;
+                    }
+                  )}
+
+                  <h2>Will improve on</h2>
+                  {improvements.map((improvement: string, index: number) => {
+                    return <p key={index}>{improvement}</p>;
+                  })}
+                </div>
+              )}
+            </section>
           );
         }
       )}
