@@ -32,11 +32,11 @@ describe('entries', () => {
       .next()
       .click();
 
-    cy.findByText(/i'm grateful for/gi);
-    cy.findByText(/today i'm doing/gi);
-    cy.findByText(/i'm a/gi);
-    cy.findByText(/was great today when/gi);
-    cy.findByText(/will improve on/gi);
+    cy.findByText(/estoy agradecido por/gi);
+    cy.findByText(/¿Qué haría grandioso hoy/gi);
+    cy.findByText(/Estoy\.\.\./i);
+    cy.findByText(/Cosas increíbles que sucedieron hoy/gi);
+    cy.findByText(/¿Cómo podría haber mejorado aún más hoy/gi);
 
     cy.get('section')
       .first()
