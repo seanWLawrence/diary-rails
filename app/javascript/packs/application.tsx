@@ -6,7 +6,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Entries } from '../pages/entries';
 
-const client = new ApolloClient({
+import './reset.css';
+import './index.css';
+
+let client = new ApolloClient({
   uri: '/graphql',
 });
 
@@ -26,10 +29,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(document.createElement('div'))
   );
 });
-
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-// const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)

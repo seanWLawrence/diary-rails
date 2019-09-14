@@ -49,26 +49,24 @@ export let Entries: FC<{}> = () => {
 
   return (
     <main className="main__wrapper">
-      <h1 className="title">
-        <Link to="/entries" className="title__anchor">
-          Diario de 5 minutos
-        </Link>
-      </h1>
+      <Link to="/entries" className="title__anchor">
+        <h1 className="title">Diario de 5 minutos</h1>
+      </Link>
 
       <nav className="nav">
         <Link to="/entries/new" className="nav__anchor">
           nueva entrada
         </Link>
-      </nav>
 
-      <button
-        className="entries__toggle-collpase-button"
-        onClick={() =>
-          toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
-        }
-      >
-        {allEntriesOpen ? 'Collapse all -' : 'Open all +'}
-      </button>
+        <button
+          className="entries__toggle-collpase-button"
+          onClick={() =>
+            toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
+          }
+        >
+          {allEntriesOpen ? 'Collapse all -' : 'Open all +'}
+        </button>
+      </nav>
 
       {entries.map(
         (

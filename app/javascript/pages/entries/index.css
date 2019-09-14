@@ -1,15 +1,36 @@
-.main__wrapper {
+@-ms-viewport {
+  width: device-width;
+}
+
+body {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.title {
-  margin-top: 2em;
+.main__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5em 0 5em 0;
+  width: 90vw;
+  max-width: 500px;
+}
+
+@media (max-width: 400px) {
+  .main__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5em 0 5em 0;
+    width: 90vw;
+    max-width: 500px;
+    margin-top: 2em;
+  }
 }
 
 .title__anchor {
-  font-family: 'Merriweather', Georgia, 'Times New Roman', Times, serif;
+  margin-top: 2em;
   border-bottom: 1px solid #999;
   border-top: 1px solid #999;
   padding: .5em;
@@ -17,19 +38,30 @@
   text-align: center;
   color: #222;
   text-decoration: none;
+  text-align: center;
+  margin: 0;
+  word-wrap: break-word;
 }
 
 .nav {
   margin-top: 1em;
+  width: 320px;
+  max-width: 90vw;
+  display: flex;
+  justify-content: space-around;
 }
 
-.nav__anchor {
+.nav__anchor,
+.entries__toggle-collpase-button {
   color: #333;
   text-decoration: none;
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
   padding: .5em;
   border-radius: .25em;
+  border: 0;
+  border: 2px solid transparent;
 }
 
 .nav__anchor:visited,
@@ -38,6 +70,7 @@
 }
 
 .nav__anchor:focus,
+.entries__toggle-collpase-button:focus,
 .title__anchor:focus,
 button:focus {
   outline: 0;
@@ -46,12 +79,8 @@ button:focus {
   border-radius: .25em;
 }
 
-.entries__toggle-collpase-button {
-  margin-top: 2em;
-}
-
 .title__anchor:focus {
-  border: 0;
+  border: 1px solid transparent;
 }
 
 .entry__wrapper {
@@ -59,10 +88,10 @@ button:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 80vw;
 }
 
-.entry__date,
-.entries__toggle-collpase-button {
+.entry__date {
   font-family: 'Segoe UI',
     Tahoma,
     Geneva,
