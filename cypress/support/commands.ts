@@ -1,4 +1,5 @@
 import { join } from 'path';
+import '@testing-library/cypress/add-commands';
 
 let railsRunnerPrefix = 'rails runner -e test ';
 
