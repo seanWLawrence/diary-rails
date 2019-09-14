@@ -36,9 +36,10 @@ group :development, :test do
   gem 'rubocop'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
-end
+  gem 'graphiql-rails'
 
-group :development do
+  # These packages were in dev only, but moved here since we use test as dev
+  
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -57,5 +58,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'graphiql-rails', group: :development

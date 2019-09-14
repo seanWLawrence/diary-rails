@@ -12,8 +12,8 @@ class GraphqlController < ApplicationController
     result = DiarySchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
-    raise e unless Rails.env.development?
-    handle_error_in_development e
+    raise e unless Rails.env.development? || Rails.env.test?
+    handle_error_in_development_or_test e
   end
 
   private
@@ -36,7 +36,7 @@ class GraphqlController < ApplicationController
     end
   end
 
-  def handle_error_in_development(e)
+  def handle_error_in_development_or_test(e)
     logger.error e.message
     logger.error e.backtrace.join("\n")
 
