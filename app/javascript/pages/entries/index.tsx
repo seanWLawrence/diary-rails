@@ -83,20 +83,18 @@ export let Entries: FC<{}> = () => {
 
           return (
             <section key={id} className="entry__wrapper">
-              <h2 className="entry__date">
-                {dateCreated}{' '}
-                <button
-                  onClick={() =>
-                    toggleEntriesOpen(
-                      isOpen
-                        ? entriesOpen.filter(entryId => entryId !== id)
-                        : [...entriesOpen, id]
-                    )
-                  }
-                >
-                  {isOpen ? '−' : '+'}
-                </button>
-              </h2>
+              <button
+                className="entry__date"
+                onClick={() =>
+                  toggleEntriesOpen(
+                    isOpen
+                      ? entriesOpen.filter(entryId => entryId !== id)
+                      : [...entriesOpen, id]
+                  )
+                }
+              >
+                {dateCreated} {isOpen ? '−' : '+'}
+              </button>
 
               {isOpen && (
                 <div>
