@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, FormEvent, ChangeEvent } from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
@@ -34,9 +34,27 @@ interface InputGroupProps {
 }
 
 let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
+  let addNewInput = () =>
+    setState({
+      ...state,
+      [name]: [...state[name], ''],
+    });
+
+  let onInputChange = (index: number) => (
+    event: ChangeEvent<HTMLInputElement>
+  ): void =>
+    setState({
+      ...state,
+      [name]: state[name].map(
+        (existingValue: string, existingIndex: number) => {
+          return index === existingIndex ? event.target.value : existingValue;
+        }
+      ),
+    });
+
   return (
     <>
-      {state[name].map((value, index) => {
+      {state[name].map((value: string, index: number) => {
         let isLastInput = state[name].length - 1 === index;
 
         return (
@@ -47,30 +65,14 @@ let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
               className="new-entry__input"
               value={value}
               required
-              onChange={v =>
-                setState({
-                  ...state,
-                  [name]: state[name].map(
-                    (existingValue: string, existingIndex: number) => {
-                      return index === existingIndex
-                        ? value.target.value
-                        : existingValue;
-                    }
-                  ),
-                })
-              }
+              onChange={onInputChange(index)}
             />
             {isLastInput && (
               <div className="new-entry__button-wrapper">
                 <button
                   type="button"
                   className="new-entry__button--add"
-                  onClick={() =>
-                    setState({
-                      ...state,
-                      [name]: [...state[name], ''],
-                    })
-                  }
+                  onClick={addNewInput}
                 >
                   Add new
                 </button>
@@ -91,6 +93,12 @@ interface NewEntryState {
   improvements: string[];
 }
 
+let onSubmit = (fn: Function) => (event: FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+
+  fn();
+};
+
 export let NewEntry: FC<{}> = () => {
   let [newEntry, setNewEntry] = useState<NewEntryState>({
     gratitudes: [''],
@@ -98,6 +106,10 @@ export let NewEntry: FC<{}> = () => {
     affirmations: [''],
     positiveExperiences: [''],
     improvements: [''],
+  });
+
+  let [upsertEntry, { data }] = useMutation(UPSERT_ENTRY_MUTATION, {
+    variables: newEntry,
   });
 
   return (
@@ -112,7 +124,7 @@ export let NewEntry: FC<{}> = () => {
         </Link>
       </nav>
 
-      <form className="new-entry__form">
+      <form className="new-entry__form" onSubmit={onSubmit(upsertEntry)}>
         <h2 className="new-entry__title">Estoy agradecido por...</h2>
 
         <InputGroup
@@ -140,6 +152,8 @@ export let NewEntry: FC<{}> = () => {
           label="Affirma"
         />
 
+        <button>Save</button>
+
         <h2 className="new-entry__title">
           Cosas increíbles que sucedieron hoy...
         </h2>
@@ -161,6 +175,8 @@ export let NewEntry: FC<{}> = () => {
           state={newEntry}
           label="Mejorado"
         />
+
+        <button>Save</button>
       </form>
     </main>
   );
