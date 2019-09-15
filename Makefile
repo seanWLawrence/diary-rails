@@ -1,9 +1,15 @@
-schema-fetch = yarn apollo-codegen introspect-schema \
-	http://localhost:3000/graphql --output app/graphql/schema.json \
+schema-path = app/graphql/schema.json
 
-schema-generate = yarn apollo-codegen generate **/*.graphql \
-	--schema app/graphql/schema.json --target typescript \
-	--output app/javascript/types/graphql-schema.d.ts --addTypename
+schema-fetch = apollo client:download-schema $(schema-path) \
+	--config apollo.config.js
+
+schema-generate = yarn apollo client:codegen  \
+	--config apollo.config.js \
+	--localSchemaFile $(schema-path) \
+	--tsFileExtension d.ts \
+	--target typescript \
+	--tagName gql \
+	--includes app/javascript/**/*.graphql.ts
 
 schema-types = $(schema-fetch) && $(schema-generate)
 
