@@ -1,3 +1,12 @@
+.new-entry__main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5em 0 5em 0;
+  width: 90vw;
+  max-width: 500px
+}
+
 .new-entry__form {
   /* margin: 2em; */
 }
@@ -43,5 +52,4 @@
   font-weight: 400;
   font-size: 1.25rem;
   text-align: center;
-  margin-top: 2em;
 }
