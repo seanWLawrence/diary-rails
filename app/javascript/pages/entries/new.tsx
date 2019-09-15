@@ -1,30 +1,14 @@
 import React, { FC, useState, FormEvent, ChangeEvent } from 'react';
-import { gql } from 'apollo-boost';
+
 import { useMutation } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
 
-import './new.css';
+import UPSERT_ENTRY_MUTATION, {
+  UpsertEntryMutation,
+  UpsertEntryMutationVariables,
+} from './upsert-entry.graphql';
 
-let UPSERT_ENTRY_MUTATION = gql`
-  mutation UpsertEntryMutation(
-    $gratitudes: [String!]!
-    $goals: [String!]!
-    $affirmations: [String!]!
-    $positiveExperiences: [String!]
-    $improvements: [String!]
-  ) {
-    upsertEntry(
-      gratitudes: $gratitudes
-      goals: $goals
-      affirmations: $affirmations
-      positiveExperiences: $positiveExperiences
-      improvements: $improvements
-    ) {
-      errors
-      success
-    }
-  }
-`;
+import './new.css';
 
 interface InputGroupProps {
   setState: React.Dispatch<React.SetStateAction<NewEntryState>>;

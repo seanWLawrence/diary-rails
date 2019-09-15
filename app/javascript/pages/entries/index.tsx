@@ -1,42 +1,16 @@
 import React, { FC, useState } from 'react';
-import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
 
 import NewEntry from './new';
+import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 
 export { NewEntry };
 
 import './index.css';
 
-let ENTRIES_QUERY = gql`
-  query EntriesQuery {
-    entries {
-      id
-      dateCreated
-      gratitudes
-      goals
-      affirmations
-      positiveExperiences
-      improvements
-    }
-  }
-`;
-
-interface EntriesData {
-  entries: Array<{
-    id: string;
-    dateCreated: string;
-    gratitudes: string[];
-    goals: string[];
-    affirmations: string[];
-    positiveExperiences: string[];
-    improvements: string[];
-  }>;
-}
-
 export let Entries: FC<{}> = () => {
-  let { loading, error, data } = useQuery<EntriesData>(ENTRIES_QUERY);
+  let { loading, error, data } = useQuery<EntriesQuery>(ENTRIES_QUERY);
   let [entriesOpen, toggleEntriesOpen] = useState([]);
 
   if (loading) {
