@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { Entries } from '../pages/entries';
+import { Entries, NewEntry } from '../pages/entries';
 
 import './reset.css';
 import './index.css';
@@ -18,6 +18,7 @@ let App: FC<{}> = () => {
     <ApolloProvider client={client}>
       <Router>
         <Route exact path="/entries" component={Entries} name="Entries" />
+        <Route exact path="/entries/new" component={NewEntry} name="NewEntry" />
       </Router>
     </ApolloProvider>
   );

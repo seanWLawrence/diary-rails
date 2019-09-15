@@ -3,6 +3,10 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { Link } from 'react-router-dom';
 
+import NewEntry from './new';
+
+export { NewEntry };
+
 import './index.css';
 
 let ENTRIES_QUERY = gql`
@@ -57,20 +61,21 @@ export let Entries: FC<{}> = () => {
         <Link to="/entries/new" className="nav__anchor">
           nueva entrada
         </Link>
-
-        <button
-          className="entries__toggle-collpase-button"
-          onClick={() =>
-            toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
-          }
-        >
-          {allEntriesOpen ? 'Collapse all -' : 'Open all +'}
-        </button>
+        {entries.length > 1 && (
+          <button
+            className="entries__toggle-collpase-button"
+            onClick={() =>
+              toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
+            }
+          >
+            {allEntriesOpen ? 'Collapse all -' : 'Open all +'}
+          </button>
+        )}
       </nav>
 
-      {entries.map(
-        (
-          {
+      {entries.length > 0 &&
+        entries.map(
+          ({
             dateCreated,
             gratitudes,
             goals,
@@ -78,85 +83,87 @@ export let Entries: FC<{}> = () => {
             positiveExperiences,
             improvements,
             id,
-          },
-          index
-        ) => {
-          let isOpen = entriesOpen.includes(id);
+          }) => {
+            let isOpen = entriesOpen.includes(id);
 
-          return (
-            <section key={id} className="entry__wrapper">
-              <button
-                className="entry__date"
-                onClick={() =>
-                  toggleEntriesOpen(
-                    isOpen
-                      ? entriesOpen.filter(entryId => entryId !== id)
-                      : [...entriesOpen, id]
-                  )
-                }
-              >
-                {dateCreated} {isOpen ? '-' : '+'}
-              </button>
+            return (
+              <section key={id} className="entry__wrapper">
+                <button
+                  className="entry__date"
+                  onClick={() =>
+                    toggleEntriesOpen(
+                      isOpen
+                        ? entriesOpen.filter(entryId => entryId !== id)
+                        : [...entriesOpen, id]
+                    )
+                  }
+                >
+                  {dateCreated} {isOpen ? '-' : '+'}
+                </button>
 
-              {isOpen && (
-                <div>
-                  <h2 className="entry__title">Estoy agradecido por...</h2>
-                  {gratitudes.map((gratitude: string, index: number) => {
-                    return (
-                      <p key={index} className="entry__text">
-                        {gratitude}
-                      </p>
-                    );
-                  })}
-
-                  <h2 className="entry__title">¿Qué haría grandioso hoy?</h2>
-                  {goals.map((goal: string, index: number) => {
-                    return (
-                      <p key={index} className="entry__text">
-                        {goal}
-                      </p>
-                    );
-                  })}
-
-                  <h2 className="entry__title">Estoy...</h2>
-                  {affirmations.map((affirmation: string, index: number) => {
-                    return (
-                      <p key={index} className="entry__text">
-                        {affirmation}
-                      </p>
-                    );
-                  })}
-
-                  <h2 className="entry__title">
-                    Cosas increíbles que sucedieron hoy...
-                  </h2>
-                  {positiveExperiences.map(
-                    (positiveExperience: string, index: number) => {
+                {isOpen && (
+                  <div>
+                    <h2 className="entry__title">Estoy agradecido por...</h2>
+                    {gratitudes.map((gratitude: string, index: number) => {
                       return (
                         <p key={index} className="entry__text">
-                          {positiveExperience}
+                          {gratitude}
                         </p>
                       );
-                    }
-                  )}
+                    })}
 
-                  <h2 className="entry__title">
-                    ¿Cómo podría haber mejorado aún más hoy?
-                  </h2>
-                  {improvements.map((improvement: string, index: number) => {
-                    return (
-                      <p key={index} className="entry__text">
-                        {improvement}
-                      </p>
-                    );
-                  })}
-                </div>
-              )}
+                    <h2 className="entry__title">¿Qué haría grandioso hoy?</h2>
+                    {goals.map((goal: string, index: number) => {
+                      return (
+                        <p key={index} className="entry__text">
+                          {goal}
+                        </p>
+                      );
+                    })}
 
-              {allEntriesOpen && <hr className="entry__divider" />}
-            </section>
-          );
-        }
+                    <h2 className="entry__title">Estoy...</h2>
+                    {affirmations.map((affirmation: string, index: number) => {
+                      return (
+                        <p key={index} className="entry__text">
+                          {affirmation}
+                        </p>
+                      );
+                    })}
+
+                    <h2 className="entry__title">
+                      Cosas increíbles que sucedieron hoy...
+                    </h2>
+                    {positiveExperiences.map(
+                      (positiveExperience: string, index: number) => {
+                        return (
+                          <p key={index} className="entry__text">
+                            {positiveExperience}
+                          </p>
+                        );
+                      }
+                    )}
+
+                    <h2 className="entry__title">
+                      ¿Cómo podría haber mejorado aún más hoy?
+                    </h2>
+                    {improvements.map((improvement: string, index: number) => {
+                      return (
+                        <p key={index} className="entry__text">
+                          {improvement}
+                        </p>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {allEntriesOpen && <hr className="entry__divider" />}
+              </section>
+            );
+          }
+        )}
+
+      {entries.length === 0 && (
+        <p className="entry__text">No entries yet. Create one!</p>
       )}
     </main>
   );
