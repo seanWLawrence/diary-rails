@@ -27,11 +27,13 @@
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.1.0",
     "@testing-library/cypress": "^5.0.0",
+    "apollo-codegen": "^0.20.2",
     "cypress": "^3.4.1",
     "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
     "start": "make start",
-    "test": "make test-start"
+    "test": "make test-start",
+    "schema:generate": "make schema-generate"
   }
 }
