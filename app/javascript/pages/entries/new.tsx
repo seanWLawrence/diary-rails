@@ -73,12 +73,12 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
 
   return (
     <main className="new-entry__main-wrapper">
-      <Link to="/entries" className="title__anchor">
-        <h1 className="title">Diario de 5 minutos</h1>
+      <Link to="/entries" className="entries__logo">
+        <h1>Diario de 5 minutos</h1>
       </Link>
 
-      <nav className="nav">
-        <Link to="/entries/" className="nav__anchor">
+      <nav className="entries__nav">
+        <Link to="/entries/" className="entries__nav-anchor">
           todo entradas
         </Link>
       </nav>
@@ -120,7 +120,7 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
         />
 
         <div className="new-entry__button-wrapper">
-          <button>Save</button>
+          <button className="new-entry__button--save">Save</button>
         </div>
 
         <h2 className="new-entry__title">
@@ -145,7 +145,7 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
           label="Mejorado"
         />
         <div className="new-entry__button-wrapper">
-          <button>Save</button>
+          <button className="new-entry__button--save">Save</button>
         </div>
       </form>
     </main>

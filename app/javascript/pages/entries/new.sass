@@ -8,27 +8,13 @@
   width: 90vw
   max-width: 500px
 
-.nav
-  margin-bottom: 2em
-
-.new-entry__label
-  display: flex
-  flex-direction: column
-  font-size: .9rem
+.new-entry__title
+  font-family: $font-family-serif
+  font-style: italic
   font-weight: 400
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-  margin-top: .5em
-
-.new-entry__input
-  border: 1px solid #ddd
-  padding: .5em
-  border-radius: .25em
-  font-size: 1rem
-  margin: .5em 0
-
-  &:focus
-    outline: 0
-    box-shadow: 0 0 0 2px rgb(100, 149, 237)
+  font-size: 1.25rem
+  text-align: center
+  margin-bottom: 1em
 
 .new-entry__button-wrapper
   display: flex
@@ -38,23 +24,28 @@
     display: flex
     justify-content: space-between
 
-.new-entry__button--add,
-.new-entry__button--remove
-  border: 0
-  outline: 0
-  font-size: .75rem
-  margin: 1em
-  margin-top: .5em
-  max-width: max-content
-  color: rgb(80, 129, 217)
+.new-entry__button
+  &--add, &--remove
+    border: 0
+    outline: 0
+    font-size: .75rem
+    margin: 1em
+    margin-top: .5em
+    max-width: max-content
+    color: $color-primary
 
-  &
-    color: darkred
+  &--remove
+    color: $color-error
 
-.new-entry__title
-  font-family: $font-family-serif
-  font-style: italic
-  font-weight: 400
-  font-size: 1.25rem
-  text-align: center
-  margin-bottom: 1em
+  &--save
+    background-color: $color-primary
+    color: $color-primary-inverse
+    padding: .5em .75em
+    border: 0
+    outline: 0
+    border-radius: $border-radius
+    font-size: .75rem
+
+    &:focus
+      box-shadow: 0 0 0 2px darken($color-primary, 2.5%)
+      background-color: lighten($color-primary, 2.5%)
