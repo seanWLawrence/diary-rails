@@ -1,0 +1,11 @@
+<p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
+
+<h1>Login</h1>
+
+
+<%= form_with url: "/login", method: "post" do %>
+  <%= label_tag :diary_key, "Diary key" %>
+  <%= password_field_tag :diary_key  %>
+  <%= submit_tag "Login"  %>
+<% end %>
