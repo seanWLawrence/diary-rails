@@ -10,6 +10,8 @@ import UPSERT_ENTRY_MUTATION, {
 } from './upsert-entry.graphql';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 
+import './new.sass';
+
 interface NewEntryProps {
   history: {
     push: (path: string) => void;

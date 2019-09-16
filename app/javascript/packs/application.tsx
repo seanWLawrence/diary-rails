@@ -6,8 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Entries, NewEntry } from '../pages/entries';
 
-import './index.css';
-import './reset.css';
+import '../lib/index.sass';
 
 let client = new ApolloClient({
   uri: '/graphql',

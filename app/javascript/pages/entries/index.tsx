@@ -3,8 +3,9 @@ import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
-import './index.css';
 import NewEntry from './new';
+
+import './index.sass';
 
 export { NewEntry };
 
