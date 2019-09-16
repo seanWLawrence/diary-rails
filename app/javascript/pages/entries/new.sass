@@ -18,34 +18,39 @@
 
 .new-entry__button-wrapper
   display: flex
-  justify-content: flex-end
+  width: 100%
+  margin-top: 1em
 
   &--space-between
-    display: flex
+    @extend .new-entry__button-wrapper
     justify-content: space-between
 
-.new-entry__button
-  &--add, &--remove
-    border: 0
-    outline: 0
-    font-size: .75rem
-    margin: 1em
-    margin-top: .5em
-    max-width: max-content
-    color: $color-primary
+  &--center
+    @extend .new-entry__button-wrapper
+    justify-content: center
 
-  &--remove
-    color: $color-error
+.new-entry__button--save
+  background-color: $color-primary
+  color: $color-primary-inverse
+  padding: .5em .75em
+  border: 0
+  outline: 0
+  border-radius: $border-radius
+  font-size: .75rem
+  border: 2px solid $color-primary
 
-  &--save
-    background-color: $color-primary
-    color: $color-primary-inverse
-    padding: .5em .75em
-    border: 0
-    outline: 0
-    border-radius: $border-radius
-    font-size: .75rem
+  &:focus
+    background-color: transparentize($color-primary, .1)
+    border: 2px solid darken($color-primary, 2.5%)
+    box-shadow: none
 
-    &:focus
-      box-shadow: 0 0 0 2px darken($color-primary, 2.5%)
-      background-color: lighten($color-primary, 2.5%)
+.new-entry__button--view-all-fields
+  @extend .new-entry__button--save
+  background-color: $color-primary-inverse
+  color: $color-primary
+  border: 2px solid $color-primary
+
+  &:focus
+    background-color: transparentize($color-primary, .9)
+    border: 2px solid $color-primary
+    box-shadow: none

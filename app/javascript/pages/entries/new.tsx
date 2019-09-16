@@ -43,6 +43,8 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
     positiveExperiences: [''],
   });
 
+  let [viewAllFields, setViewAllFields] = useState(false);
+
   let [upsertEntry] = useMutation<
     UpsertEntryMutation,
     UpsertEntryMutationVariables
@@ -119,32 +121,44 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
           required
         />
 
-        <div className="new-entry__button-wrapper">
-          <button className="new-entry__button--save">Save</button>
-        </div>
+        {viewAllFields && (
+          <>
+            <h2 className="new-entry__title">
+              Cosas increíbles que sucedieron hoy...
+            </h2>
+            <InputGroup
+              name="positiveExperiences"
+              setState={setNewEntry}
+              state={newEntry}
+              label="Increible cosa"
+            />
+            <h2 className="new-entry__title">
+              ¿Cómo podría haber mejorado aún más hoy?
+            </h2>
+            <InputGroup
+              name="improvements"
+              setState={setNewEntry}
+              state={newEntry}
+              label="Mejorado"
+            />
+          </>
+        )}
 
-        <h2 className="new-entry__title">
-          Cosas increíbles que sucedieron hoy...
-        </h2>
+        <div
+          className={`new-entry__button-wrapper--${
+            viewAllFields ? 'center' : 'space-between'
+          }`}
+        >
+          {!viewAllFields && (
+            <button
+              className="new-entry__button--view-all-fields"
+              type="button"
+              onClick={() => setViewAllFields(true)}
+            >
+              View all fields
+            </button>
+          )}
 
-        <InputGroup
-          name="positiveExperiences"
-          setState={setNewEntry}
-          state={newEntry}
-          label="Increible cosa"
-        />
-
-        <h2 className="new-entry__title">
-          ¿Cómo podría haber mejorado aún más hoy?
-        </h2>
-
-        <InputGroup
-          name="improvements"
-          setState={setNewEntry}
-          state={newEntry}
-          label="Mejorado"
-        />
-        <div className="new-entry__button-wrapper">
           <button className="new-entry__button--save">Save</button>
         </div>
       </form>
