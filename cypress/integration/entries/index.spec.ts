@@ -1,6 +1,9 @@
 describe('entries', () => {
+  beforeEach(() => {
+    cy.login();
+  });
+
   it('allows you to toggle entries open/collapsed', () => {
-    cy.viewport('iphone-5');
     cy.callRuby('./entries_seed.rb');
     cy.visit('/entries');
 
@@ -49,7 +52,7 @@ describe('entries', () => {
     });
   });
 
-  it.only('allows you to create an entry', () => {
+  it('allows you to create an entry', () => {
     cy.visit('/entries/new');
 
     // These searh by label text to assert there is a form

@@ -14,6 +14,7 @@ declare global {
        * @example cy.cleanDatabase()
        */
       cleanDatabase(): void;
+      login(): void;
     }
   }
 }

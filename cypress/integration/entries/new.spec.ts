@@ -1,5 +1,6 @@
 describe('entries/new', () => {
   beforeEach(() => {
+    cy.login();
     cy.visit('/entries/new');
   });
 

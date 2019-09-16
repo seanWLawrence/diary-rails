@@ -65,13 +65,13 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
           data.entries = [...data.entries, entry];
 
           cache.writeQuery({
-            query: ENTRIES_QUERY,
             data,
-          });
-        } catch (_error) {
-          cache.writeQuery({
             query: ENTRIES_QUERY,
+          });
+        } catch (_) {
+          cache.writeQuery({
             data: { entries: [entry] },
+            query: ENTRIES_QUERY,
           });
         } finally {
           push('/entries');
