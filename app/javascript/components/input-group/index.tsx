@@ -1,5 +1,7 @@
 import React, { ChangeEvent, FC } from 'react';
 
+import './index.sass';
+
 interface InputGroupProps {
   label: string;
   name: string;
