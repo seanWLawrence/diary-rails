@@ -1,4 +1,5 @@
 import { gql } from 'apollo-boost';
+
 import { EntriesQuery } from './__generated__/EntriesQuery';
 
 export { EntriesQuery };

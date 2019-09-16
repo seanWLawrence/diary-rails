@@ -1,27 +1,25 @@
-import React, { FC, useState, FormEvent, ChangeEvent } from 'react';
-
 import { useMutation } from '@apollo/react-hooks';
+import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import './new.css';
 import UPSERT_ENTRY_MUTATION, {
   UpsertEntryMutation,
-  UpsertEntryMutationVariables,
+  UpsertEntryMutationVariables
 } from './upsert-entry.graphql';
 
-import './new.css';
-
 interface InputGroupProps {
+  label: string;
+  name: string;
   setState: React.Dispatch<React.SetStateAction<NewEntryState>>;
   state: NewEntryState;
-  name: string;
-  label: string;
 }
 
 let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
   let addNewInput = () =>
     setState({
       ...state,
-      [name]: [...state[name], ''],
+      [name]: [...state[name], '']
     });
 
   let onInputChange = (index: number) => (
@@ -29,11 +27,9 @@ let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
   ): void =>
     setState({
       ...state,
-      [name]: state[name].map(
-        (existingValue: string, existingIndex: number) => {
-          return index === existingIndex ? event.target.value : existingValue;
-        }
-      ),
+      [name]: state[name].map((existingValue: string, existingIndex: number) =>
+        index === existingIndex ? event.target.value : existingValue
+      )
     });
 
   return (
@@ -70,30 +66,32 @@ let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
 };
 
 interface NewEntryState {
-  gratitudes: string[];
-  goals: string[];
   affirmations: string[];
-  positiveExperiences: string[];
+  goals: string[];
+  gratitudes: string[];
   improvements: string[];
+  positiveExperiences: string[];
 }
 
-let onSubmit = (fn: Function) => (event: FormEvent<HTMLFormElement>) => {
+let onSubmit = (fn: (val?: any) => void) => (
+  event: FormEvent<HTMLFormElement>
+) => {
   event.preventDefault();
 
   fn();
 };
 
-export let NewEntry: FC<{}> = () => {
+export let NewEntry: FC = () => {
   let [newEntry, setNewEntry] = useState<NewEntryState>({
-    gratitudes: [''],
-    goals: [''],
     affirmations: [''],
-    positiveExperiences: [''],
+    goals: [''],
+    gratitudes: [''],
     improvements: [''],
+    positiveExperiences: ['']
   });
 
   let [upsertEntry, { data }] = useMutation(UPSERT_ENTRY_MUTATION, {
-    variables: newEntry,
+    variables: newEntry
   });
 
   return (

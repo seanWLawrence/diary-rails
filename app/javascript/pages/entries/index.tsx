@@ -1,15 +1,14 @@
-import React, { FC, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import NewEntry from './new';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
+import './index.css';
+import NewEntry from './new';
 
 export { NewEntry };
 
-import './index.css';
-
-export let Entries: FC<{}> = () => {
+export let Entries: FC = () => {
   let { loading, error, data } = useQuery<EntriesQuery>(ENTRIES_QUERY);
   let [entriesOpen, toggleEntriesOpen] = useState([]);
 
@@ -78,55 +77,45 @@ export let Entries: FC<{}> = () => {
                 {isOpen && (
                   <div>
                     <h2 className="entry__title">Estoy agradecido por...</h2>
-                    {gratitudes.map((gratitude: string, index: number) => {
-                      return (
-                        <p key={index} className="entry__text">
-                          {gratitude}
-                        </p>
-                      );
-                    })}
+                    {gratitudes.map((gratitude: string, index: number) => (
+                      <p key={index} className="entry__text">
+                        {gratitude}
+                      </p>
+                    ))}
 
                     <h2 className="entry__title">¿Qué haría grandioso hoy?</h2>
-                    {goals.map((goal: string, index: number) => {
-                      return (
-                        <p key={index} className="entry__text">
-                          {goal}
-                        </p>
-                      );
-                    })}
+                    {goals.map((goal: string, index: number) => (
+                      <p key={index} className="entry__text">
+                        {goal}
+                      </p>
+                    ))}
 
                     <h2 className="entry__title">Estoy...</h2>
-                    {affirmations.map((affirmation: string, index: number) => {
-                      return (
-                        <p key={index} className="entry__text">
-                          {affirmation}
-                        </p>
-                      );
-                    })}
+                    {affirmations.map((affirmation: string, index: number) => (
+                      <p key={index} className="entry__text">
+                        {affirmation}
+                      </p>
+                    ))}
 
                     <h2 className="entry__title">
                       Cosas increíbles que sucedieron hoy...
                     </h2>
                     {positiveExperiences.map(
-                      (positiveExperience: string, index: number) => {
-                        return (
-                          <p key={index} className="entry__text">
-                            {positiveExperience}
-                          </p>
-                        );
-                      }
+                      (positiveExperience: string, index: number) => (
+                        <p key={index} className="entry__text">
+                          {positiveExperience}
+                        </p>
+                      )
                     )}
 
                     <h2 className="entry__title">
                       ¿Cómo podría haber mejorado aún más hoy?
                     </h2>
-                    {improvements.map((improvement: string, index: number) => {
-                      return (
-                        <p key={index} className="entry__text">
-                          {improvement}
-                        </p>
-                      );
-                    })}
+                    {improvements.map((improvement: string, index: number) => (
+                      <p key={index} className="entry__text">
+                        {improvement}
+                      </p>
+                    ))}
                   </div>
                 )}
 

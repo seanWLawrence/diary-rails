@@ -13,6 +13,12 @@ schema-generate = yarn apollo client:codegen  \
 
 schema-types = $(schema-fetch) && $(schema-generate)
 
+lint:
+	yarn tslint \
+	--fix \
+	--project tsconfig.json \
+	--exclude cypress
+
 test-start:
 	$(schema-types)
 	bundle exec rails db:reset RAILS_ENV=test
