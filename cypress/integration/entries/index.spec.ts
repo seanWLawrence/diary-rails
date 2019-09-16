@@ -1,5 +1,3 @@
-/// <reference path="../support/index.d.ts" />
-
 describe('entries', () => {
   it('allows you to toggle entries open/collapsed', () => {
     cy.viewport('iphone-5');
