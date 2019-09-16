@@ -55,24 +55,26 @@ let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
               required
               onChange={onInputChange(index)}
             />
-            <button
-              type="button"
-              className="new-entry__button--add"
-              onClick={removeInput(index)}
-            >
-              Remove
-            </button>
-            {isLastInput && (
-              <div className="new-entry__button-wrapper">
-                <button
-                  type="button"
-                  className="new-entry__button--add"
-                  onClick={addNewInput}
-                >
-                  Add new
-                </button>
-              </div>
-            )}
+            <div className="new-entry__button-wrapper--space-between">
+              <button
+                type="button"
+                className="new-entry__button--remove"
+                onClick={removeInput(index)}
+              >
+                Remove
+              </button>
+              {isLastInput && (
+                <div className="new-entry__button-wrapper">
+                  <button
+                    type="button"
+                    className="new-entry__button--add"
+                    onClick={addNewInput}
+                  >
+                    Add new
+                  </button>
+                </div>
+              )}
+            </div>
           </label>
         );
       })}
