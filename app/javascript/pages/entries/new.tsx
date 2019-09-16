@@ -1,86 +1,20 @@
 import { useMutation } from '@apollo/react-hooks';
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import './new.css';
+import InputGroup from '../../components/input-group';
+
 import UPSERT_ENTRY_MUTATION, {
   UpsertEntryMutation,
   UpsertEntryMutationVariables,
 } from './upsert-entry.graphql';
+import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 
-interface InputGroupProps {
-  label: string;
-  name: string;
-  setState: React.Dispatch<React.SetStateAction<NewEntryState>>;
-  state: NewEntryState;
+interface NewEntryProps {
+  history: {
+    push: (path: string) => void;
+  };
 }
-
-let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
-  let addNewInput = () =>
-    setState({
-      ...state,
-      [name]: [...state[name], ''],
-    });
-
-  let removeInput = (index: number) => () =>
-    setState({
-      ...state,
-      [name]: state[name].filter(
-        (_: string, existingIndex: number) => existingIndex !== index,
-      ),
-    });
-
-  let onInputChange = (index: number) => (
-    event: ChangeEvent<HTMLInputElement>,
-  ): void =>
-    setState({
-      ...state,
-      [name]: state[name].map((existingValue: string, existingIndex: number) =>
-        index === existingIndex ? event.target.value : existingValue,
-      ),
-    });
-
-  return (
-    <>
-      {state[name].map((value: string, index: number) => {
-        let isLastInput = state[name].length - 1 === index;
-
-        return (
-          <label className="new-entry__label" key={index}>
-            {label} #{index + 1}
-            <input
-              type="text"
-              className="new-entry__input"
-              value={value}
-              required
-              onChange={onInputChange(index)}
-            />
-            <div className="new-entry__button-wrapper--space-between">
-              <button
-                type="button"
-                className="new-entry__button--remove"
-                onClick={removeInput(index)}
-              >
-                Remove
-              </button>
-              {isLastInput && (
-                <div className="new-entry__button-wrapper">
-                  <button
-                    type="button"
-                    className="new-entry__button--add"
-                    onClick={addNewInput}
-                  >
-                    Add new
-                  </button>
-                </div>
-              )}
-            </div>
-          </label>
-        );
-      })}
-    </>
-  );
-};
 
 interface NewEntryState {
   affirmations: string[];
@@ -98,7 +32,7 @@ let onSubmit = (fn: (val?: any) => void) => (
   fn();
 };
 
-export let NewEntry: FC = () => {
+export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
   let [newEntry, setNewEntry] = useState<NewEntryState>({
     affirmations: [''],
     goals: [''],
@@ -107,8 +41,32 @@ export let NewEntry: FC = () => {
     positiveExperiences: [''],
   });
 
-  let [upsertEntry, { data }] = useMutation(UPSERT_ENTRY_MUTATION, {
+  let [upsertEntry] = useMutation<
+    UpsertEntryMutation,
+    UpsertEntryMutationVariables
+  >(UPSERT_ENTRY_MUTATION, {
     variables: newEntry,
+    update(
+      cache,
+      {
+        data: {
+          upsertEntry: { success, entry },
+        },
+      },
+    ) {
+      if (success) {
+        let data: EntriesQuery = cache.readQuery({ query: ENTRIES_QUERY });
+
+        data.entries = [...data.entries, entry];
+
+        cache.writeQuery({
+          query: ENTRIES_QUERY,
+          data,
+        });
+
+        push('/entries');
+      }
+    },
   });
 
   return (
@@ -123,7 +81,12 @@ export let NewEntry: FC = () => {
         </Link>
       </nav>
 
-      <form className="new-entry__form" onSubmit={onSubmit(upsertEntry)}>
+      <form
+        className="new-entry__form"
+        onSubmit={onSubmit(() => {
+          upsertEntry();
+        })}
+      >
         <h2 className="new-entry__title">Estoy agradecido por...</h2>
 
         <InputGroup
@@ -131,6 +94,7 @@ export let NewEntry: FC = () => {
           setState={setNewEntry}
           state={newEntry}
           label="Agradecio"
+          required
         />
 
         <h2 className="new-entry__title">¿Qué haría grandioso hoy?</h2>
@@ -140,6 +104,7 @@ export let NewEntry: FC = () => {
           setState={setNewEntry}
           state={newEntry}
           label="Metra"
+          required
         />
 
         <h2 className="new-entry__title">Estoy...</h2>
@@ -149,9 +114,12 @@ export let NewEntry: FC = () => {
           setState={setNewEntry}
           state={newEntry}
           label="Affirma"
+          required
         />
 
-        <button>Save</button>
+        <div className="new-entry__button-wrapper">
+          <button>Save</button>
+        </div>
 
         <h2 className="new-entry__title">
           Cosas increíbles que sucedieron hoy...
@@ -174,8 +142,9 @@ export let NewEntry: FC = () => {
           state={newEntry}
           label="Mejorado"
         />
-
-        <button>Save</button>
+        <div className="new-entry__button-wrapper">
+          <button>Save</button>
+        </div>
       </form>
     </main>
   );

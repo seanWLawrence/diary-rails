@@ -24,6 +24,15 @@ export default gql`
     ) {
       errors
       success
+      entry {
+        id
+        gratitudes
+        goals
+        affirmations
+        positiveExperiences
+        improvements
+        dateCreated
+      }
     }
   }
 `;
