@@ -4,7 +4,7 @@
     "baseUrl": "../node_modules",
     "target": "es5",
     "lib": ["es5", "dom"],
-    "types": ["cypress", "node"]
+    "types": ["cypress", "node", "cypress/types"]
   },
   "include": [
     "**/*.ts", "webpack.config.js", "plugins/index.js"
