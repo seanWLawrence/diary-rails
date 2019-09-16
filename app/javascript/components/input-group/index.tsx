@@ -65,6 +65,7 @@ export let InputGroup: FC<InputGroupProps> = ({
                   type="button"
                   className="input-group__button--remove"
                   onClick={removeInput(index)}
+                  data-testid="input-group-remove-button"
                 >
                   &times;
                 </button>

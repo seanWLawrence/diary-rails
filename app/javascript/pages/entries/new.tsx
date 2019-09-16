@@ -59,16 +59,23 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
       },
     ) {
       if (success) {
-        let data: EntriesQuery = cache.readQuery({ query: ENTRIES_QUERY });
+        try {
+          let data: EntriesQuery = cache.readQuery({ query: ENTRIES_QUERY });
 
-        data.entries = [...data.entries, entry];
+          data.entries = [...data.entries, entry];
 
-        cache.writeQuery({
-          data,
-          query: ENTRIES_QUERY,
-        });
-
-        push('/entries');
+          cache.writeQuery({
+            query: ENTRIES_QUERY,
+            data,
+          });
+        } catch (_error) {
+          cache.writeQuery({
+            query: ENTRIES_QUERY,
+            data: { entries: [entry] },
+          });
+        } finally {
+          push('/entries');
+        }
       }
     },
   });
@@ -85,12 +92,7 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
         </Link>
       </nav>
 
-      <form
-        className="new-entry__form"
-        onSubmit={onSubmit(() => {
-          upsertEntry();
-        })}
-      >
+      <form className="new-entry__form" onSubmit={onSubmit(upsertEntry)}>
         <h2 className="new-entry__title">Estoy agradecido por...</h2>
 
         <InputGroup
