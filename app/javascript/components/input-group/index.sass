@@ -8,13 +8,53 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
   margin-top: .5em
 
+.input-group__input-wrapper
+  display: flex
+  align-items: baseline
+
 .input-group__input
   border: 1px solid #ddd
   padding: .5em
   border-radius: .25em
   font-size: 1rem
   margin: .5em 0
+  width: 100%
 
   &:focus
     outline: 0
     box-shadow: 0 0 0 2px rgb(100, 149, 237)
+
+.input-group__button-wrapper
+  display: flex
+  width: 100%
+
+  &--flex-end
+    @extend .input-group__button-wrapper
+    justify-content: flex-end
+
+  &--space-between
+    @extend .input-group__button-wrapper
+    display: flex
+    justify-content: space-between
+
+.input-group__button
+  &--add, &--remove
+    border: 0
+    outline: 0
+    font-size: .75rem
+    margin: 1em
+    margin-top: .5em
+    max-width: max-content
+    color: $color-primary
+
+  &--remove
+    color: $color-error
+    font-size: 1rem
+
+    &:focus
+      background-color: transparentize($color-error, .9)
+      box-shadow: 0 0 0 2px darken($color-error, 2.5%)
+
+  &--add:focus
+    background-color: transparentize($color-primary, .9)
+    box-shadow: 0 0 0 2px darken($color-primary, 2.5%)

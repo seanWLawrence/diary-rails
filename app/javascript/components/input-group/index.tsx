@@ -41,38 +41,45 @@ export let InputGroup: FC<InputGroupProps> = ({
       ),
     });
 
+  let shouldDisplayRemoveButton = state[name].length > 1;
+
   return (
     <>
       {state[name].map((value: string, index: number) => {
         let isLastInput = state[name].length - 1 === index;
 
         return (
-          <label className="new-entry__label" key={index}>
+          <label className="input-group__label" key={index}>
             {required && '*'}
             {label} #{index + 1}
-            <input
-              type="text"
-              className="new-entry__input"
-              value={value}
-              required={required}
-              onChange={onInputChange(index)}
-            />
-            <div className="new-entry__button-wrapper--space-between">
-              {state[name].length > 1 && (
+            <div className="input-group__input-wrapper">
+              <input
+                type="text"
+                className="input-group__input"
+                value={value}
+                required={required}
+                onChange={onInputChange(index)}
+              />
+              {shouldDisplayRemoveButton && (
                 <button
                   type="button"
-                  className="new-entry__button--remove"
+                  className="input-group__button--remove"
                   onClick={removeInput(index)}
                 >
-                  Remove
+                  &times;
                 </button>
               )}
-
+            </div>
+            <div
+              className={`input-group__button-wrapper--${
+                shouldDisplayRemoveButton ? 'space-between' : 'flex-end'
+              }`}
+            >
               {isLastInput && (
-                <div className="new-entry__button-wrapper">
+                <div className="input-group__button-wrapper--flex-end">
                   <button
                     type="button"
-                    className="new-entry__button--add"
+                    className="input-group__button--add"
                     onClick={addNewInput}
                   >
                     Add new
