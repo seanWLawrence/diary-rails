@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 import InputGroup from '../../components/input-group';
 
+import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 import UPSERT_ENTRY_MUTATION, {
   UpsertEntryMutation,
   UpsertEntryMutationVariables,
 } from './upsert-entry.graphql';
-import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 
 import './new.sass';
 
@@ -64,8 +64,8 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
         data.entries = [...data.entries, entry];
 
         cache.writeQuery({
-          query: ENTRIES_QUERY,
           data,
+          query: ENTRIES_QUERY,
         });
 
         push('/entries');
