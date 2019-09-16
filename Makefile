@@ -13,6 +13,9 @@ schema-generate = yarn apollo client:codegen  \
 
 schema-types = $(schema-fetch) && $(schema-generate)
 
+schema-generate:
+	$(schema-generate)
+
 lint:
 	yarn tslint \
 	--fix \
