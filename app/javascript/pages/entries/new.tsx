@@ -22,6 +22,14 @@ let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
       [name]: [...state[name], ''],
     });
 
+  let removeInput = (index: number) => () =>
+    setState({
+      ...state,
+      [name]: state[name].filter(
+        (_: string, existingIndex: number) => existingIndex !== index,
+      ),
+    });
+
   let onInputChange = (index: number) => (
     event: ChangeEvent<HTMLInputElement>,
   ): void =>
@@ -47,6 +55,13 @@ let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
               required
               onChange={onInputChange(index)}
             />
+            <button
+              type="button"
+              className="new-entry__button--add"
+              onClick={removeInput(index)}
+            >
+              Remove
+            </button>
             {isLastInput && (
               <div className="new-entry__button-wrapper">
                 <button
