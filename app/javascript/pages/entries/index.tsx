@@ -28,7 +28,7 @@ export let Entries: FC = () => {
   return (
     <main className="entries__main-wrapper">
       <Link to="/entries" className="entries__logo">
-        <h1 className="">Diario de 5 minutos</h1>
+        <h1>Diario de 5 minutos</h1>
       </Link>
 
       <nav className="entries__nav">
