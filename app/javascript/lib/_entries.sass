@@ -1,0 +1,52 @@
+.entries__logo
+  margin-top: 2em
+  border-bottom: 1px solid $color-gray-medium
+  border-top: 1px solid $color-gray-medium
+  padding: .5em
+  max-width: max-content
+  text-align: center
+  color: $color-gray-darkest
+  text-decoration: none
+  text-align: center
+  margin: 0
+  word-wrap: break-word
+
+  &:focus
+    border: 1px solid transparent
+    @include button-focus
+
+.entries__main-wrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin: 5em 0 5em 0
+  width: 90vw
+  max-width: 500px
+
+@media (max-width: 400px)
+  .entries__main-wrapper
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin: 5em 0 5em 0
+    width: 90vw
+    max-width: 500px
+    margin-top: 2em
+
+.entries__nav
+  margin-top: 1em
+  width: 320px
+  max-width: 90vw
+  display: flex
+  justify-content: space-around
+
+  &-anchor
+    color: $color-gray-darkest
+    text-decoration: none
+    font-weight: bold
+    font-family: $font-family-sans-serif
+    font-size: 1rem
+    padding: .5em
+    border-radius: $border-radius
+    border: 0
+    border: 2px solid transparent
