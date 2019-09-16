@@ -49,16 +49,21 @@ export let Entries: FC = () => {
 
       {entries.length > 0 &&
         entries.map(
-          ({
-            dateCreated,
-            gratitudes,
-            goals,
-            affirmations,
-            positiveExperiences,
-            improvements,
-            id,
-          }) => {
+          (
+            {
+              dateCreated,
+              gratitudes,
+              goals,
+              affirmations,
+              positiveExperiences,
+              improvements,
+              id,
+            },
+            index,
+          ) => {
             let isOpen = entriesOpen.includes(id);
+
+            let isNotLastEntry = entries.length - 1 !== index;
 
             return (
               <section key={id} className="entries__entry-wrapper">
@@ -124,7 +129,9 @@ export let Entries: FC = () => {
                   </div>
                 )}
 
-                {allEntriesOpen && <hr className="entries__entry-divider" />}
+                {allEntriesOpen && isNotLastEntry && (
+                  <hr className="entries__entry-divider" />
+                )}
               </section>
             );
           },
