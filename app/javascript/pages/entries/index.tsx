@@ -67,7 +67,7 @@ export let Entries: FC = () => {
                     toggleEntriesOpen(
                       isOpen
                         ? entriesOpen.filter(entryId => entryId !== id)
-                        : [...entriesOpen, id]
+                        : [...entriesOpen, id],
                     )
                   }
                 >
@@ -105,7 +105,7 @@ export let Entries: FC = () => {
                         <p key={index} className="entry__text">
                           {positiveExperience}
                         </p>
-                      )
+                      ),
                     )}
 
                     <h2 className="entry__title">
@@ -122,7 +122,7 @@ export let Entries: FC = () => {
                 {allEntriesOpen && <hr className="entry__divider" />}
               </section>
             );
-          }
+          },
         )}
 
       {entries.length === 0 && (

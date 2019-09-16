@@ -10,7 +10,7 @@ import './index.css';
 import './reset.css';
 
 let client = new ApolloClient({
-  uri: '/graphql',
+  uri: '/graphql'
 });
 
 let App: FC = () => (
