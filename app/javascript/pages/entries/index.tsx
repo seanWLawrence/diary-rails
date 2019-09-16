@@ -26,18 +26,18 @@ export let Entries: FC = () => {
   let allEntriesOpen = entriesOpen.length === entries.length;
 
   return (
-    <main className="main__wrapper">
-      <Link to="/entries" className="title__anchor">
-        <h1 className="title">Diario de 5 minutos</h1>
+    <main className="entries__main-wrapper">
+      <Link to="/entries" className="entries__logo">
+        <h1 className="">Diario de 5 minutos</h1>
       </Link>
 
-      <nav className="nav">
-        <Link to="/entries/new" className="nav__anchor">
+      <nav className="entries__nav">
+        <Link to="/entries/new" className="entries__nav-anchor">
           nueva entrada
         </Link>
         {entries.length > 1 && (
           <button
-            className="entries__toggle-collpase-button"
+            className="entries__button--toggle-collapse"
             onClick={() =>
               toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
             }
@@ -61,9 +61,9 @@ export let Entries: FC = () => {
             let isOpen = entriesOpen.includes(id);
 
             return (
-              <section key={id} className="entry__wrapper">
+              <section key={id} className="entries__entry-wrapper">
                 <button
-                  className="entry__date"
+                  className="entries__entry-date"
                   onClick={() =>
                     toggleEntriesOpen(
                       isOpen
@@ -77,57 +77,63 @@ export let Entries: FC = () => {
 
                 {isOpen && (
                   <div>
-                    <h2 className="entry__title">Estoy agradecido por...</h2>
+                    <h2 className="entries__entry-title">
+                      Estoy agradecido por...
+                    </h2>
                     {gratitudes.map((gratitude: string, index: number) => (
-                      <p key={index} className="entry__text">
+                      <p key={index} className="entries__entry-text">
                         {gratitude}
                       </p>
                     ))}
 
-                    <h2 className="entry__title">¿Qué haría grandioso hoy?</h2>
+                    <h2 className="entries__entry-title">
+                      ¿Qué haría grandioso hoy?
+                    </h2>
                     {goals.map((goal: string, index: number) => (
-                      <p key={index} className="entry__text">
+                      <p key={index} className="entries__entry-text">
                         {goal}
                       </p>
                     ))}
 
-                    <h2 className="entry__title">Estoy...</h2>
+                    <h2 className="entries__entry-title">Estoy...</h2>
                     {affirmations.map((affirmation: string, index: number) => (
-                      <p key={index} className="entry__text">
+                      <p key={index} className="entries__entry-text">
                         {affirmation}
                       </p>
                     ))}
 
-                    <h2 className="entry__title">
+                    <h2 className="entries__entry-title">
                       Cosas increíbles que sucedieron hoy...
                     </h2>
                     {positiveExperiences.map(
                       (positiveExperience: string, index: number) => (
-                        <p key={index} className="entry__text">
+                        <p key={index} className="entries__entry-text">
                           {positiveExperience}
                         </p>
                       ),
                     )}
 
-                    <h2 className="entry__title">
+                    <h2 className="entries__entry-title">
                       ¿Cómo podría haber mejorado aún más hoy?
                     </h2>
                     {improvements.map((improvement: string, index: number) => (
-                      <p key={index} className="entry__text">
+                      <p key={index} className="entries__entry-text">
                         {improvement}
                       </p>
                     ))}
                   </div>
                 )}
 
-                {allEntriesOpen && <hr className="entry__divider" />}
+                {allEntriesOpen && <hr className="entries__entry-divider" />}
               </section>
             );
           },
         )}
 
       {entries.length === 0 && (
-        <p className="entry__text">No entries yet. Create one!</p>
+        <div className="entries__main-wrapper--no-entries">
+          <p className="entries__entry-text">No entries yet. Create one!</p>
+        </div>
       )}
     </main>
   );
