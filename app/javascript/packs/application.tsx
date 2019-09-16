@@ -10,7 +10,7 @@ import './index.css';
 import './reset.css';
 
 let client = new ApolloClient({
-  uri: '/graphql'
+  uri: '/graphql',
 });
 
 let App: FC = () => (
@@ -25,6 +25,6 @@ let App: FC = () => (
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <App />,
-    document.body.appendChild(document.createElement('div'))
+    document.body.appendChild(document.createElement('div')),
   );
 });

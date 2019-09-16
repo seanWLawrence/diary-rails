@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 import {
   UpsertEntryMutation,
-  UpsertEntryMutationVariables
+  UpsertEntryMutationVariables,
 } from './__generated__/UpsertEntryMutation';
 
 export { UpsertEntryMutation, UpsertEntryMutationVariables };

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './new.css';
 import UPSERT_ENTRY_MUTATION, {
   UpsertEntryMutation,
-  UpsertEntryMutationVariables
+  UpsertEntryMutationVariables,
 } from './upsert-entry.graphql';
 
 interface InputGroupProps {
@@ -19,17 +19,17 @@ let InputGroup: FC<InputGroupProps> = ({ setState, state, name, label }) => {
   let addNewInput = () =>
     setState({
       ...state,
-      [name]: [...state[name], '']
+      [name]: [...state[name], ''],
     });
 
   let onInputChange = (index: number) => (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>,
   ): void =>
     setState({
       ...state,
       [name]: state[name].map((existingValue: string, existingIndex: number) =>
-        index === existingIndex ? event.target.value : existingValue
-      )
+        index === existingIndex ? event.target.value : existingValue,
+      ),
     });
 
   return (
@@ -74,7 +74,7 @@ interface NewEntryState {
 }
 
 let onSubmit = (fn: (val?: any) => void) => (
-  event: FormEvent<HTMLFormElement>
+  event: FormEvent<HTMLFormElement>,
 ) => {
   event.preventDefault();
 
@@ -87,11 +87,11 @@ export let NewEntry: FC = () => {
     goals: [''],
     gratitudes: [''],
     improvements: [''],
-    positiveExperiences: ['']
+    positiveExperiences: [''],
   });
 
   let [upsertEntry, { data }] = useMutation(UPSERT_ENTRY_MUTATION, {
-    variables: newEntry
+    variables: newEntry,
   });
 
   return (
