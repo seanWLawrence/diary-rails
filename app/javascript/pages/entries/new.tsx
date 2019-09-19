@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 import InputGroup from '../../components/input-group';
 
+import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 import UPSERT_ENTRY_MUTATION, {
   UpsertEntryMutation,
   UpsertEntryMutationVariables,
 } from './upsert-entry.graphql';
-import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 
 import './new.sass';
 
@@ -59,16 +59,23 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
       },
     ) {
       if (success) {
-        let data: EntriesQuery = cache.readQuery({ query: ENTRIES_QUERY });
+        try {
+          let data: EntriesQuery = cache.readQuery({ query: ENTRIES_QUERY });
 
-        data.entries = [...data.entries, entry];
+          data.entries = [...data.entries, entry];
 
-        cache.writeQuery({
-          query: ENTRIES_QUERY,
-          data,
-        });
-
-        push('/entries');
+          cache.writeQuery({
+            data,
+            query: ENTRIES_QUERY,
+          });
+        } catch (_) {
+          cache.writeQuery({
+            data: { entries: [entry] },
+            query: ENTRIES_QUERY,
+          });
+        } finally {
+          push('/entries');
+        }
       }
     },
   });
@@ -85,12 +92,7 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
         </Link>
       </nav>
 
-      <form
-        className="new-entry__form"
-        onSubmit={onSubmit(() => {
-          upsertEntry();
-        })}
-      >
+      <form className="new-entry__form" onSubmit={onSubmit(upsertEntry)}>
         <h2 className="new-entry__title">Estoy agradecido por...</h2>
 
         <InputGroup

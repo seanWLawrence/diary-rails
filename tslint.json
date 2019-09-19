@@ -20,13 +20,17 @@
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
     },
     "prefer-const": false,
-    "prettier": true
+    "prettier": true,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false
   },
   "jsRules": {
     "max-line-length": {
       "options": [80]
     },
     "prefer-const": false,
-    "prettier": true
+    "prettier": true,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false
   }
 }
