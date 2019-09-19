@@ -80,6 +80,8 @@ development: &development
 test:
   <<: *development
 
+  check_yarn_integrity: false
+
 production:
   <<: *default
 
