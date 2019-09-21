@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
-  def new; end
+  def new
+    if session[:authenticated] == false
+      render :new
+    else
+      redirect_to '/entries'
+    end
+  end
 
   def create
     diary_key = params[:diary_key]
