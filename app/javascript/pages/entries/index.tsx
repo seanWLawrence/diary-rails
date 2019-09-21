@@ -49,6 +49,9 @@ export let Entries: FC = () => {
         <Link to="/entries/new" className="entries__nav-anchor">
           nueva entrada
         </Link>
+        <a href="logout" className="entries__nav-anchor">
+          logout
+        </a>
         {entries.length > 1 && (
           <button
             className="entries__button--toggle-collapse"

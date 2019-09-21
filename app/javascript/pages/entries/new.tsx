@@ -90,6 +90,10 @@ export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
         <Link to="/entries/" className="entries__nav-anchor">
           todo entradas
         </Link>
+
+        <a href="/logout" className="entries__nav-anchor">
+          logout
+        </a>
       </nav>
 
       <form className="new-entry__form" onSubmit={onSubmit(upsertEntry)}>
