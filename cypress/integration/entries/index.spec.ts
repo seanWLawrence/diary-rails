@@ -51,28 +51,4 @@ describe('entries', () => {
       expect($elements.length).to.eq(11);
     });
   });
-
-  it('allows you to create an entry', () => {
-    cy.visit('/entries/new');
-
-    // These searh by label text to assert there is a form
-    cy.findByLabelText(/estoy agradecido por/gi);
-    cy.findByLabelText(/¿Qué haría grandioso hoy/gi);
-    cy.findByLabelText(/Estoy\.\.\./i);
-    cy.findByLabelText(/Cosas increíbles que sucedieron hoy/gi);
-    cy.findByLabelText(/¿Cómo podría haber mejorado aún más hoy/gi);
-
-    /**
-     * Test navigation works
-     */
-    cy.visit('/entries');
-
-    cy.findByText(/nueva entrada/i).click();
-
-    cy.findByLabelText(/estoy agradecido por/gi);
-    cy.findByLabelText(/¿Qué haría grandioso hoy/gi);
-    cy.findByLabelText(/Estoy\.\.\./i);
-    cy.findByLabelText(/Cosas increíbles que sucedieron hoy/gi);
-    cy.findByLabelText(/¿Cómo podría haber mejorado aún más hoy/gi);
-  });
 });
