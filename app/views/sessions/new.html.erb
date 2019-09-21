@@ -1,11 +1,16 @@
-<p id="alert"><%= alert %></p>
-<p id="notice"><%= notice %></p>
+<main class="new-session__wrapper">
+  <h1 class="new-session__title">Login</h1>
 
-<h1>Login</h1>
+  <%= form_with url: "/login", method: "post", class: "new-session__form" do %>
+  <label for="diary_key" class="new-session__label">
+    <div class="new-session__label-text">
+      Diary key
+      <span class="new-session__label-error" id="alert"><%= alert %></span>
+    </div>
+    <%= password_field_tag :diary_key, nil, class: "new-session__input" %>
+  </label>
 
-
-<%= form_with url: "/login", method: "post" do %>
-  <%= label_tag :diary_key, "Diary key" %>
-  <%= password_field_tag :diary_key  %>
-  <%= submit_tag "Login"  %>
-<% end %>
+  <div class="new-session__button-wrapper">
+    <%= submit_tag "Login", class: "new-session__button" %> <% end %>
+  </div>
+</main>
