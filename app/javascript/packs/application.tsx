@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { Entries, NewEntry } from '../pages/entries';
+import { EditEntry, Entries, NewEntry } from '../pages/entries';
 
 import '../lib/index.sass';
 
@@ -17,6 +17,7 @@ let App: FC = () => (
     <Router>
       <Route exact path="/entries" component={Entries} name="Entries" />
       <Route exact path="/entries/new" component={NewEntry} name="NewEntry" />
+      <Route path="/entries/:entryId" component={EditEntry} name="EditEntry" />
     </Router>
   </ApolloProvider>
 );
