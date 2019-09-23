@@ -1,0 +1,48 @@
+@import '../../lib/variables'
+
+.entry-form__title
+  font-family: $font-family-serif
+  font-style: italic
+  font-weight: 400
+  font-size: 1.25rem
+  text-align: center
+  margin-bottom: 1em
+
+.entry-form__button-wrapper
+  display: flex
+  width: 100%
+  margin-top: 1em
+
+  &--space-between
+    @extend .entry-form__button-wrapper
+    justify-content: space-between
+
+  &--center
+    @extend .entry-form__button-wrapper
+    justify-content: center
+
+.entry-form__button--save
+  background-color: $color-primary
+  color: $color-primary-inverse
+  padding: .5em .75em
+  border: 0
+  outline: 0
+  border-radius: $border-radius
+  font-size: .75rem
+  border: 2px solid $color-primary
+
+  &:focus
+    background-color: transparentize($color-primary, .1)
+    border: 2px solid darken($color-primary, 2.5%)
+    box-shadow: none
+
+.entry-form__button--view-all-fields
+  @extend .entry-form__button--save
+  background-color: $color-primary-inverse
+  color: $color-primary
+  border: 2px solid $color-primary
+
+  &:focus
+    background-color: transparentize($color-primary, .9)
+    border: 2px solid $color-primary
+    box-shadow: none
