@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { FC } from 'react';
-import EntryForm from '../form';
-import EntriesNavigation from '../navigation';
-import EntriesWrapper from '../wrapper';
+import EntryForm from '../components/form';
+import EntriesNavigation from '../components/navigation';
+import EntriesWrapper from '../components/wrapper';
 import ENTRY_QUERY, { EntryQuery } from './entry.graphql';
 
 interface EditEntryProps {

@@ -4,11 +4,11 @@ import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import DataWrapper from './components/data-wrapper';
+import EntriesNavigation from './components/navigation';
+import EntriesWrapper from './components/wrapper';
 import EditEntry from './edit';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
-import EntriesNavigation from './navigation';
 import NewEntry from './new';
-import EntriesWrapper from './wrapper';
 
 import './index.sass';
 

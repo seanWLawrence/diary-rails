@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { EntriesQuery_entries } from '../__generated__/EntriesQuery';
+import { EntriesQuery_entries } from '../../__generated__/EntriesQuery';
 
 import './index.sass';
 
