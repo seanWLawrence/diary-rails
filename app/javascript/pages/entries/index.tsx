@@ -74,23 +74,32 @@ export let Entries: FC = () => {
 
             return (
               <section key={id} className="entries__entry-wrapper">
-                <button
-                  className="entries__entry-date"
-                  onClick={() =>
-                    toggleEntriesOpen(
-                      isOpen
-                        ? entriesOpen.filter(entryId => entryId !== id)
-                        : [...entriesOpen, id],
-                    )
-                  }
-                >
-                  {formattedDate} {isOpen ? '-' : '+'}
-                </button>
+                <div className="entries__entry-date-wrapper">
+                  <button
+                    className="entries__entry-date"
+                    onClick={() =>
+                      toggleEntriesOpen(
+                        isOpen
+                          ? entriesOpen.filter(entryId => entryId !== id)
+                          : [...entriesOpen, id],
+                      )
+                    }
+                  >
+                    {formattedDate} {isOpen ? '-' : '+'}{' '}
+                  </button>
+
+                  {isOpen && (
+                    <Link
+                      to={`/entries/${id}/edit`}
+                      className="entries__edit-link"
+                    >
+                      Edit
+                    </Link>
+                  )}
+                </div>
 
                 {isOpen && (
                   <div>
-                    <Link to={`/entries/${id}/edit`}>Edit</Link>
-
                     <h2 className="entries__entry-title">
                       Estoy agradecido por...
                     </h2>
