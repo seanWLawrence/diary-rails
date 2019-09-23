@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
+import Loader from '../../../../components/loader';
 import Error from '../error';
-import Loader from '../loader';
 
 interface DataWrapperProps {
   data: any;
