@@ -3,6 +3,7 @@ import format from 'date-fns/format';
 import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Loader from '../../components/loader';
 import EditEntry from './edit';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 import EntriesNavigation from './navigation';
@@ -32,7 +33,7 @@ export let Entries: FC = () => {
   let [entriesOpen, toggleEntriesOpen] = useState([]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (error) {

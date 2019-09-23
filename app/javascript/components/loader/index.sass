@@ -1,0 +1,52 @@
+@import '../../lib/index'
+
+.loader__wrapper
+  width: 100vw
+  height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+.loader__animation-wrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: 150px
+
+.loader__animation
+  background-color: $color-primary
+  height: 50px
+  width: 50px
+  animation: rotate 10s infinite
+  animation-delay: 0
+  border-radius: 100%
+
+.loader__text
+  font-family: $font-family-sans-serif
+  margin: 2em
+
+@keyframes rotate
+  0%
+    border: 0px solid $color-primary
+  10%
+    border: 50px solid lighten($color-primary, 20%)
+  20%
+    border: 0px solid $color-primary
+  30%
+    border: 50px solid lighten($color-primary, 20%)
+  40%
+    border: 0px solid $color-primary
+  50%
+    border: 50px solid lighten($color-primary, 20%)
+  60%
+    border: 0px solid $color-primary
+  70%
+    border: 50px solid lighten($color-primary, 20%)
+  80%
+    border: 0px solid $color-primary
+  90%
+    border: 50px solid lighten($color-primary, 20%)
+  100%
+    border: 25px solid lighten($color-primary, 20%)
