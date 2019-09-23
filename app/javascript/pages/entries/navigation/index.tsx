@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { EntriesQuery_entries } from '../__generated__/EntriesQuery';
 
+import './index.sass';
+
 interface EntriesNavigtaionProps {
   toggleEntriesOpen?: (entryIds: string[]) => void;
   allEntriesOpen?: boolean;
@@ -23,26 +25,26 @@ let EntriesNavigation: FC<EntriesNavigtaionProps> = ({
 
   return (
     <>
-      <Link to="/entries" className="entries__logo">
+      <Link to="/entries" className="entry-navigation__logo">
         <h1>Diario de 5 minutos</h1>
       </Link>
 
-      <nav className="entries__nav">
+      <nav className="entry-navigation__nav">
         {shouldDisplayAllEntriesButton && (
-          <Link to="/entries/" className="entries__nav-anchor">
+          <Link to="/entries/" className="entry-navigation__nav-anchor">
             todo entradas
           </Link>
         )}
 
         {shouldDisplayNewEntryButton && (
-          <Link to="/entries/new" className="entries__nav-anchor">
+          <Link to="/entries/new" className="entry-navigation__nav-anchor">
             nuevo entrada
           </Link>
         )}
 
         {shouldDisplayToggle && (
           <button
-            className="entries__button--toggle-collapse"
+            className="entry-navigation__nav-anchor"
             onClick={() =>
               toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
             }
@@ -51,7 +53,7 @@ let EntriesNavigation: FC<EntriesNavigtaionProps> = ({
           </button>
         )}
 
-        <a href="/logout" className="entries__nav-anchor">
+        <a href="/logout" className="entry-navigation__nav-anchor">
           logout
         </a>
       </nav>
