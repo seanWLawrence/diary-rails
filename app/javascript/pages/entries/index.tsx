@@ -3,7 +3,7 @@ import format from 'date-fns/format';
 import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Loader from '../../components/loader';
+import DataWrapper from '../../components/data-wrapper';
 import EditEntry from './edit';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 import EntriesNavigation from './navigation';
@@ -32,118 +32,116 @@ export let Entries: FC = () => {
   let { loading, error, data } = useQuery<EntriesQuery>(ENTRIES_QUERY);
   let [entriesOpen, toggleEntriesOpen] = useState([]);
 
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <p>Error!</p>;
-  }
-
-  let { entries } = data;
-
-  let allEntriesOpen = entriesOpen.length === entries.length;
-
   return (
-    <EntriesWrapper>
-      <EntriesNavigation
-        allEntriesOpen={allEntriesOpen}
-        toggleEntriesOpen={toggleEntriesOpen}
-        entries={entries}
-        view="index"
-      />
+    <DataWrapper loading={loading || true} data={data} error={error}>
+      {({ data: { entries } }) => {
+        let allEntriesOpen = entriesOpen.length === entries.length;
 
-      {entries.length > 0 &&
-        entries.map(
-          (
-            {
-              dateCreated,
-              gratitudes,
-              goals,
-              affirmations,
-              positiveExperiences,
-              improvements,
-              id,
-            },
-            index,
-          ) => {
-            let isOpen = entriesOpen.includes(id);
+        return (
+          <EntriesWrapper>
+            <EntriesNavigation
+              allEntriesOpen={allEntriesOpen}
+              toggleEntriesOpen={toggleEntriesOpen}
+              entries={entries}
+              view="index"
+            />
 
-            let isNotLastEntry = entries.length - 1 !== index;
+            {entries.length > 0 &&
+              entries.map(
+                (
+                  {
+                    dateCreated,
+                    gratitudes,
+                    goals,
+                    affirmations,
+                    positiveExperiences,
+                    improvements,
+                    id,
+                  },
+                  index: number,
+                ) => {
+                  let isOpen = entriesOpen.includes(id);
 
-            let formattedDate = format(new Date(dateCreated), 'MMMM d');
+                  let isNotLastEntry = entries.length - 1 !== index;
 
-            return (
-              <section key={id} className="entries__entry-wrapper">
-                <div className="entries__entry-date-wrapper">
-                  <button
-                    className="entries__entry-date"
-                    onClick={() =>
-                      toggleEntriesOpen(
-                        isOpen
-                          ? entriesOpen.filter(entryId => entryId !== id)
-                          : [...entriesOpen, id],
-                      )
-                    }
-                  >
-                    {formattedDate} {isOpen ? '-' : '+'}{' '}
-                  </button>
+                  let formattedDate = format(new Date(dateCreated), 'MMMM d');
 
-                  {isOpen && (
-                    <Link
-                      to={`/entries/${id}/edit`}
-                      className="entries__edit-link"
-                    >
-                      Edit
-                    </Link>
-                  )}
-                </div>
+                  return (
+                    <section key={id} className="entries__entry-wrapper">
+                      <div className="entries__entry-date-wrapper">
+                        <button
+                          className="entries__entry-date"
+                          onClick={() =>
+                            toggleEntriesOpen(
+                              isOpen
+                                ? entriesOpen.filter(entryId => entryId !== id)
+                                : [...entriesOpen, id],
+                            )
+                          }
+                        >
+                          {formattedDate} {isOpen ? '-' : '+'}{' '}
+                        </button>
 
-                {isOpen && (
-                  <div>
-                    <h2 className="entries__entry-title">
-                      Estoy agradecido por...
-                    </h2>
+                        {isOpen && (
+                          <Link
+                            to={`/entries/${id}/edit`}
+                            className="entries__edit-link"
+                          >
+                            Edit
+                          </Link>
+                        )}
+                      </div>
 
-                    <EntryValue values={gratitudes} />
+                      {isOpen && (
+                        <div>
+                          <h2 className="entries__entry-title">
+                            Estoy agradecido por...
+                          </h2>
 
-                    <h2 className="entries__entry-title">
-                      ¿Qué haría grandioso hoy?
-                    </h2>
+                          <EntryValue values={gratitudes} />
 
-                    <EntryValue values={goals} />
+                          <h2 className="entries__entry-title">
+                            ¿Qué haría grandioso hoy?
+                          </h2>
 
-                    <h2 className="entries__entry-title">Estoy...</h2>
+                          <EntryValue values={goals} />
 
-                    <EntryValue values={affirmations} />
+                          <h2 className="entries__entry-title">Estoy...</h2>
 
-                    <h2 className="entries__entry-title">
-                      Cosas increíbles que sucedieron hoy...
-                    </h2>
+                          <EntryValue values={affirmations} />
 
-                    <EntryValue values={positiveExperiences} />
+                          <h2 className="entries__entry-title">
+                            Cosas increíbles que sucedieron hoy...
+                          </h2>
 
-                    <h2 className="entries__entry-title">
-                      ¿Cómo podría haber mejorado aún más hoy?
-                    </h2>
+                          <EntryValue values={positiveExperiences} />
 
-                    <EntryValue values={improvements} />
-                  </div>
-                )}
+                          <h2 className="entries__entry-title">
+                            ¿Cómo podría haber mejorado aún más hoy?
+                          </h2>
 
-                {allEntriesOpen && isNotLastEntry && (
-                  <hr className="entries__entry-divider" />
-                )}
-              </section>
-            );
-          },
-        )}
+                          <EntryValue values={improvements} />
+                        </div>
+                      )}
 
-      {entries.length === 0 && (
-        <div className="entries__main-wrapper--no-entries">
-          <p className="entries__entry-text">No entries yet. Create one!</p>
-        </div>
-      )}
-    </EntriesWrapper>
+                      {allEntriesOpen && isNotLastEntry && (
+                        <hr className="entries__entry-divider" />
+                      )}
+                    </section>
+                  );
+                },
+              )}
+
+            {entries.length === 0 && (
+              <div className="entries__main-wrapper--no-entries">
+                <p className="entries__entry-text">
+                  No entries yet. Create one!
+                </p>
+              </div>
+            )}
+          </EntriesWrapper>
+        );
+      }}
+    </DataWrapper>
   );
 };

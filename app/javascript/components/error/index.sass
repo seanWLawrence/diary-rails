@@ -1,0 +1,28 @@
+@import '../../lib/index'
+
+.error__wrapper
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  height: 100vh
+  width: 100vw
+
+.error__title
+  color: $color-error
+
+.error__text
+  font-family: $font-family-sans-serif
+
+.error__refresh-button
+  border: 0
+  outline: 0
+  font-size: .75rem
+  margin: 1em
+  margin-top: .5em
+  max-width: max-content
+  color: $color-primary
+
+  &:focus
+    background-color: transparentize($color-primary, .9)
+    box-shadow: 0 0 0 2px darken($color-primary, 2.5%)
