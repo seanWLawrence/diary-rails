@@ -1,6 +1,6 @@
 module Mutations
   class UpsertEntry < Mutations::BaseMutation
-    argument :entry_id, ID, required: false
+    argument :id, ID, required: false
     argument :gratitudes, [String], required: true
     argument :goals, [String], required: true
     argument :affirmations, [String], required: true
@@ -12,7 +12,7 @@ module Mutations
     field :entry, Types::Entry, null: true
 
     def resolve(
-      entry_id: nil,
+      id: nil,
       gratitudes:,
       goals:,
       affirmations: [],
@@ -27,8 +27,8 @@ module Mutations
         improvements: improvements
       }
 
-      if entry_id
-        entry = Entry.find_by id: entry_id
+      if id
+        entry = Entry.find_by id: id
 
         entry&.update params
       else

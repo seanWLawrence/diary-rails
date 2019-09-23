@@ -9,6 +9,7 @@ export { UpsertEntryMutation, UpsertEntryMutationVariables };
 
 export default gql`
   mutation UpsertEntryMutation(
+    $id: ID
     $gratitudes: [String!]!
     $goals: [String!]!
     $affirmations: [String!]!
@@ -16,6 +17,7 @@ export default gql`
     $improvements: [String!]
   ) {
     upsertEntry(
+      id: $id
       gratitudes: $gratitudes
       goals: $goals
       affirmations: $affirmations
