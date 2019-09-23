@@ -1,5 +1,5 @@
 module Types
-  class Entry < Types::BaseObject
+  class Entry < Types::BaseType
     field :gratitudes, [String], null: false
     field :goals, [String], null: false
     field :affirmations, [String], null: false
