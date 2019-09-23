@@ -279,7 +279,7 @@
             "description": null,
             "args": [
               {
-                "name": "entryId",
+                "name": "id",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",

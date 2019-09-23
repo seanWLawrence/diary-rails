@@ -29,6 +29,7 @@ export interface UpsertEntryMutation {
 }
 
 export interface UpsertEntryMutationVariables {
+  id?: string | null;
   gratitudes: string[];
   goals: string[];
   affirmations: string[];
