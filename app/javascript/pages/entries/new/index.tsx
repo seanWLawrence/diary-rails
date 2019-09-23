@@ -9,7 +9,7 @@ interface NewEntryProps {
   };
 }
 
-export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
+let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
   return (
     <EntriesWrapper>
       <EntriesNavigation view="new" />

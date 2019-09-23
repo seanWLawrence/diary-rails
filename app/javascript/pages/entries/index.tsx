@@ -6,13 +6,9 @@ import { Link } from 'react-router-dom';
 import DataWrapper from './components/data-wrapper';
 import EntriesNavigation from './components/navigation';
 import EntriesWrapper from './components/wrapper';
-import EditEntry from './edit';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
-import NewEntry from './new';
 
 import './index.sass';
-
-export { NewEntry, EditEntry };
 
 let EntryValue: FC<{ values: string[] }> = ({ values }) => {
   return (
@@ -28,12 +24,12 @@ let EntryValue: FC<{ values: string[] }> = ({ values }) => {
   );
 };
 
-export let Entries: FC = () => {
+let Entries: FC = () => {
   let { loading, error, data } = useQuery<EntriesQuery>(ENTRIES_QUERY);
   let [entriesOpen, toggleEntriesOpen] = useState([]);
 
   return (
-    <DataWrapper loading={loading || true} data={data} error={error}>
+    <DataWrapper loading={loading} data={data} error={error}>
       {({ data: { entries } }) => {
         let allEntriesOpen = entriesOpen.length === entries.length;
 
@@ -145,3 +141,5 @@ export let Entries: FC = () => {
     </DataWrapper>
   );
 };
+
+export default Entries;

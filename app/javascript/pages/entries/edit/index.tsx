@@ -16,7 +16,7 @@ interface EditEntryProps {
   };
 }
 
-export let EditEntry: FC<EditEntryProps> = ({
+let EditEntry: FC<EditEntryProps> = ({
   history: { push },
   match: {
     params: { id },
