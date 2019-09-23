@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import EditEntry from './edit';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
+import EntriesNavigation from './navigation';
 import NewEntry from './new';
 
 import './index.sass';
@@ -43,28 +44,12 @@ export let Entries: FC = () => {
 
   return (
     <main className="entries__main-wrapper">
-      <Link to="/entries" className="entries__logo">
-        <h1>Diario de 5 minutos</h1>
-      </Link>
-
-      <nav className="entries__nav">
-        <Link to="/entries/new" className="entries__nav-anchor">
-          nueva entrada
-        </Link>
-        <a href="logout" className="entries__nav-anchor">
-          logout
-        </a>
-        {entries.length > 1 && (
-          <button
-            className="entries__button--toggle-collapse"
-            onClick={() =>
-              toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
-            }
-          >
-            {allEntriesOpen ? 'Collapse all -' : 'Open all +'}
-          </button>
-        )}
-      </nav>
+      <EntriesNavigation
+        allEntriesOpen={allEntriesOpen}
+        toggleEntriesOpen={toggleEntriesOpen}
+        entries={entries}
+        view="index"
+      />
 
       {entries.length > 0 &&
         entries.map(

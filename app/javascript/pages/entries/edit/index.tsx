@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
 import EntryForm from '../form';
+import EntriesNavigation from '../navigation';
 import ENTRY_QUERY, { EntryQuery } from './entry.graphql';
 
 import './index.sass';
@@ -39,19 +39,7 @@ export let EditEntry: FC<EditEntryProps> = ({
 
   return (
     <main className="edit-entry__main-wrapper">
-      <Link to="/entries" className="entries__logo">
-        <h1>Diario de 5 minutos</h1>
-      </Link>
-
-      <nav className="entries__nav">
-        <Link to="/entries/" className="entries__nav-anchor">
-          todo entradas
-        </Link>
-
-        <a href="/logout" className="entries__nav-anchor">
-          logout
-        </a>
-      </nav>
+      <EntriesNavigation view="edit" />
 
       <EntryForm push={push} entry={entry} />
     </main>
