@@ -1,11 +1,20 @@
 {
   "compilerOptions": {
-    "strict": true,
     "baseUrl": "../node_modules",
     "target": "es5",
-    "lib": ["es5", "dom"],
-    "types": ["cypress", "node", "cypress/types"]
+    "lib": ["es6", "dom"],
+    "types": ["cypress", "node", "cypress/types"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true
   },
+  "exclude": [
+    "node_modules",
+    "vendor",
+    "public"
+  ],
   "include": [
     "**/*.ts", "webpack.config.js", "plugins/index.js"
   ]
