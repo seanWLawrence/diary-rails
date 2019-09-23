@@ -4,14 +4,14 @@ import { EntriesQuery_entries } from '../__generated__/EntriesQuery';
 
 import './index.sass';
 
-interface EntriesNavigtaionProps {
+interface EntriesNavigationProps {
   toggleEntriesOpen?: (entryIds: string[]) => void;
   allEntriesOpen?: boolean;
   entries?: EntriesQuery_entries[];
   view: 'new' | 'edit' | 'index';
 }
 
-let EntriesNavigation: FC<EntriesNavigtaionProps> = ({
+let EntriesNavigation: FC<EntriesNavigationProps> = ({
   toggleEntriesOpen,
   allEntriesOpen,
   entries = [],
@@ -25,26 +25,26 @@ let EntriesNavigation: FC<EntriesNavigtaionProps> = ({
 
   return (
     <>
-      <Link to="/entries" className="entry-navigation__logo">
+      <Link to="/entries" className="entries-navigation__logo">
         <h1>Diario de 5 minutos</h1>
       </Link>
 
-      <nav className="entry-navigation__nav">
+      <nav className="entries-navigation__nav">
         {shouldDisplayAllEntriesButton && (
-          <Link to="/entries/" className="entry-navigation__nav-anchor">
+          <Link to="/entries/" className="entries-navigation__nav-anchor">
             todo entradas
           </Link>
         )}
 
         {shouldDisplayNewEntryButton && (
-          <Link to="/entries/new" className="entry-navigation__nav-anchor">
+          <Link to="/entries/new" className="entries-navigation__nav-anchor">
             nuevo entrada
           </Link>
         )}
 
         {shouldDisplayToggle && (
           <button
-            className="entry-navigation__nav-anchor"
+            className="entries-navigation__nav-anchor"
             onClick={() =>
               toggleEntriesOpen(allEntriesOpen ? [] : entries.map(e => e.id))
             }
@@ -53,7 +53,7 @@ let EntriesNavigation: FC<EntriesNavigtaionProps> = ({
           </button>
         )}
 
-        <a href="/logout" className="entry-navigation__nav-anchor">
+        <a href="/logout" className="entries-navigation__nav-anchor">
           logout
         </a>
       </nav>
