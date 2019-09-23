@@ -100,7 +100,7 @@ export let Entries: FC = () => {
 
                 {isOpen && (
                   <div>
-                    <Link to={`/entries/${id}`}>Edit</Link>
+                    <Link to={`/entries/${id}/edit`}>Edit</Link>
 
                     <h2 className="entries__entry-title">
                       Estoy agradecido por...
