@@ -17,7 +17,7 @@ let App: FC = () => (
     <Router>
       <Route exact path="/entries" component={Entries} name="Entries" />
       <Route exact path="/entries/new" component={NewEntry} name="NewEntry" />
-      <Route path="/entries/:entryId" component={EditEntry} name="EditEntry" />
+      <Route path="/entries/:id/edit" component={EditEntry} name="EditEntry" />
     </Router>
   </ApolloProvider>
 );
