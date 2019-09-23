@@ -3,7 +3,7 @@ import format from 'date-fns/format';
 import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import DataWrapper from '../../components/data-wrapper';
+import DataWrapper from './components/data-wrapper';
 import EditEntry from './edit';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 import EntriesNavigation from './navigation';

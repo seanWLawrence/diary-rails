@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { FC, FormEvent, useState } from 'react';
-import InputGroup from '../../../components/input-group';
+import InputGroup from '../components/input-group';
 import ENTRIES_QUERY, { EntriesQuery } from '../entries.graphql';
 import UPSERT_ENTRY_MUTATION, {
   UpsertEntryMutation,
