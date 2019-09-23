@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
+import format from 'date-fns/format';
 import React, { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -83,6 +84,8 @@ export let Entries: FC = () => {
 
             let isNotLastEntry = entries.length - 1 !== index;
 
+            let formattedDate = format(new Date(dateCreated), 'MMMM d');
+
             return (
               <section key={id} className="entries__entry-wrapper">
                 <button
@@ -95,7 +98,7 @@ export let Entries: FC = () => {
                     )
                   }
                 >
-                  {dateCreated} {isOpen ? '-' : '+'}
+                  {formattedDate} {isOpen ? '-' : '+'}
                 </button>
 
                 {isOpen && (
