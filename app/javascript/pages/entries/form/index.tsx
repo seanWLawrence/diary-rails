@@ -60,7 +60,11 @@ let EntryForm: FC<EntryFormProps> = ({ push, entry = defaultEntry }) => {
         try {
           let data: EntriesQuery = cache.readQuery({ query: ENTRIES_QUERY });
 
-          data.entries = [...data.entries, upsertedEntry];
+          let filteredEntries = data.entries.filter(
+            ({ id }) => id !== upsertedEntry.id,
+          );
+
+          data.entries = [...filteredEntries, upsertedEntry];
 
           cache.writeQuery({
             data,
