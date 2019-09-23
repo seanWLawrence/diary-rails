@@ -1,13 +1,13 @@
 import { useMutation } from '@apollo/react-hooks';
 import React, { FC, FormEvent, useState } from 'react';
-import InputGroup from '../../components/input-group';
-import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
+import InputGroup from '../../../components/input-group';
+import ENTRIES_QUERY, { EntriesQuery } from '../entries.graphql';
 import UPSERT_ENTRY_MUTATION, {
   UpsertEntryMutation,
   UpsertEntryMutationVariables,
 } from './upsert-entry.graphql';
 
-import './form.sass';
+import './index.sass';
 
 let onSubmit = (fn: (val?: any) => void) => (
   event: FormEvent<HTMLFormElement>,

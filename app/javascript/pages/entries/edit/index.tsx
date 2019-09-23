@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import EntryForm from '../form';
 import ENTRY_QUERY, { EntryQuery } from './entry.graphql';
-import EntryForm from './form';
 
-import './edit.sass';
+import './index.sass';
 
 interface EditEntryProps {
   history: {
