@@ -2,9 +2,8 @@ import { useQuery } from '@apollo/react-hooks';
 import React, { FC } from 'react';
 import EntryForm from '../form';
 import EntriesNavigation from '../navigation';
+import EntriesWrapper from '../wrapper';
 import ENTRY_QUERY, { EntryQuery } from './entry.graphql';
-
-import './index.sass';
 
 interface EditEntryProps {
   history: {
@@ -38,11 +37,11 @@ export let EditEntry: FC<EditEntryProps> = ({
   let { entry } = data;
 
   return (
-    <main className="edit-entry__main-wrapper">
+    <EntriesWrapper>
       <EntriesNavigation view="edit" />
 
       <EntryForm push={push} entry={entry} />
-    </main>
+    </EntriesWrapper>
   );
 };
 

@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import EntryForm from '../form';
 import EntriesNavigation from '../navigation';
-
-import './index.sass';
+import EntriesWrapper from '../wrapper';
 
 interface NewEntryProps {
   history: {
@@ -12,11 +11,11 @@ interface NewEntryProps {
 
 export let NewEntry: FC<NewEntryProps> = ({ history: { push } }) => {
   return (
-    <main className="new-entry__main-wrapper">
+    <EntriesWrapper>
       <EntriesNavigation view="new" />
 
       <EntryForm push={push} />
-    </main>
+    </EntriesWrapper>
   );
 };
 

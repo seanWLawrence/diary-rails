@@ -7,6 +7,7 @@ import EditEntry from './edit';
 import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 import EntriesNavigation from './navigation';
 import NewEntry from './new';
+import EntriesWrapper from './wrapper';
 
 import './index.sass';
 
@@ -43,7 +44,7 @@ export let Entries: FC = () => {
   let allEntriesOpen = entriesOpen.length === entries.length;
 
   return (
-    <main className="entries__main-wrapper">
+    <EntriesWrapper>
       <EntriesNavigation
         allEntriesOpen={allEntriesOpen}
         toggleEntriesOpen={toggleEntriesOpen}
@@ -133,6 +134,6 @@ export let Entries: FC = () => {
           <p className="entries__entry-text">No entries yet. Create one!</p>
         </div>
       )}
-    </main>
+    </EntriesWrapper>
   );
 };
