@@ -5,6 +5,6 @@ module Types
     field :affirmations, [String], null: false
     field :positive_experiences, [String], null: false
     field :improvements, [String], null: false
-    field :things_learned, [String], null: false, default_value: []
+    field :things_learned, [String], null: false
   end
 end
