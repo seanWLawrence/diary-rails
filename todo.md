@@ -5,10 +5,9 @@
 - [x] Add edit mode, to toggle delete buttons on and off so they're out of the way when not needed
 - [ ] Add autosave on change with debouncer
   - [ ] Remove required fields (and update API and models)
-- [ ] Loading spinner and error messages are not styled? Bug
-- [ ] Display affirmations inline
+- [x] Loading spinner and error messages are not styled? Bug
+- [x] Display affirmations inline
 - [ ] Add section for "Things learned"
-- [ ] Add some color to the UI
 - [x] Only display sections that have content
 - [ ] Upload pictures
 - [ ] Add support for other languages

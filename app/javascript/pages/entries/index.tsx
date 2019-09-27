@@ -106,7 +106,7 @@ let Entries: FC = () => {
 
                           <h2 className="entries__entry-title">Estoy...</h2>
 
-                          <EntryValue values={affirmations} />
+                          <EntryValue values={[affirmations.join(', ')]} />
 
                           {hasItems(positiveExperiences) && (
                             <>
