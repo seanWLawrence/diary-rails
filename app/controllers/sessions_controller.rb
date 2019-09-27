@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    if session[:authenticated] == false
+    if !session[:authenticated]
       render :new
     else
       redirect_to '/entries'
