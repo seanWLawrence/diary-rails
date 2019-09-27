@@ -10,6 +10,8 @@ import ENTRIES_QUERY, { EntriesQuery } from './entries.graphql';
 
 import './index.sass';
 
+let hasItems = array => array.filter(Boolean).length > 0;
+
 let EntryValue: FC<{ values: string[] }> = ({ values }) => {
   return (
     <>
@@ -106,17 +108,25 @@ let Entries: FC = () => {
 
                           <EntryValue values={affirmations} />
 
-                          <h2 className="entries__entry-title">
-                            Cosas increíbles que sucedieron hoy...
-                          </h2>
+                          {hasItems(positiveExperiences) && (
+                            <>
+                              <h2 className="entries__entry-title">
+                                Cosas increíbles que sucedieron hoy...
+                              </h2>
 
-                          <EntryValue values={positiveExperiences} />
+                              <EntryValue values={positiveExperiences} />
+                            </>
+                          )}
 
-                          <h2 className="entries__entry-title">
-                            ¿Cómo podría haber mejorado aún más hoy?
-                          </h2>
+                          {hasItems(improvements) && (
+                            <>
+                              <h2 className="entries__entry-title">
+                                ¿Cómo podría haber mejorado aún más hoy?
+                              </h2>
 
-                          <EntryValue values={improvements} />
+                              <EntryValue values={improvements} />
+                            </>
+                          )}
                         </div>
                       )}
 
