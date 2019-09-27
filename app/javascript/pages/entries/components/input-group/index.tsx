@@ -59,6 +59,7 @@ export let InputGroup: FC<InputGroupProps> = ({
                 value={value}
                 required={required}
                 onChange={onInputChange(index)}
+                autoFocus={isLastInput}
               />
               {shouldDisplayRemoveButton && (
                 <button
@@ -75,22 +76,20 @@ export let InputGroup: FC<InputGroupProps> = ({
               className={`input-group__button-wrapper--${
                 shouldDisplayRemoveButton ? 'space-between' : 'flex-end'
               }`}
-            >
-              {isLastInput && (
-                <div className="input-group__button-wrapper--flex-end">
-                  <button
-                    type="button"
-                    className="input-group__button--add"
-                    onClick={addNewInput}
-                  >
-                    Add new
-                  </button>
-                </div>
-              )}
-            </div>
+            ></div>
           </label>
         );
       })}
+
+      <div className="input-group__button-wrapper--flex-end">
+        <button
+          type="button"
+          className="input-group__button--add"
+          onClick={addNewInput}
+        >
+          Add new
+        </button>
+      </div>
     </>
   );
 };
