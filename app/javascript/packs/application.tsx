@@ -16,28 +16,30 @@ let client = new ApolloClient({
   uri: '/graphql',
 });
 
-let App: FC = () => (
-  <Suspense fallback={Loader}>
+let App: FC = () => {
+  return (
     <ErrorBoundary>
-      <ApolloProvider client={client}>
-        <Router>
-          <Route exact path="/entries" component={Entries} name="Entries" />
-          <Route
-            exact
-            path="/entries/new"
-            component={NewEntry}
-            name="NewEntry"
-          />
-          <Route
-            path="/entries/:id/edit"
-            component={EditEntry}
-            name="EditEntry"
-          />
-        </Router>
-      </ApolloProvider>
+      <Suspense fallback={<Loader />}>
+        <ApolloProvider client={client}>
+          <Router>
+            <Route exact path="/entries" component={Entries} name="Entries" />
+            <Route
+              exact
+              path="/entries/new"
+              component={NewEntry}
+              name="NewEntry"
+            />
+            <Route
+              path="/entries/:id/edit"
+              component={EditEntry}
+              name="EditEntry"
+            />
+          </Router>
+        </ApolloProvider>
+      </Suspense>
     </ErrorBoundary>
-  </Suspense>
-);
+  );
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

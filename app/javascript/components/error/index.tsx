@@ -13,7 +13,7 @@ let Error: FC<ErrorProps> = ({ error: { message } }) => {
         Error
         <button
           onClick={() => window.location.reload(true)}
-          className="error__refresh-button"
+          className="error__button-refresh"
         >
           Refresh page
         </button>
