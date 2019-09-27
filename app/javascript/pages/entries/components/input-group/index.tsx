@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 
 import './index.sass';
 
@@ -17,6 +17,8 @@ export let InputGroup: FC<InputGroupProps> = ({
   label,
   required = false,
 }) => {
+  let [editMode, setEditMode] = useState<boolean>(false);
+
   let addNewInput = () =>
     setState({
       ...state,
@@ -41,10 +43,19 @@ export let InputGroup: FC<InputGroupProps> = ({
       ),
     });
 
-  let shouldDisplayRemoveButton = state[name].length > 1;
+  let hasMoreThanOneInput = state[name].length > 1;
+  let shouldDisplayRemoveButton = hasMoreThanOneInput && editMode;
 
   return (
     <>
+      {hasMoreThanOneInput && (
+        <>
+          <button onClick={() => setEditMode(!editMode)}>
+            {editMode ? 'Done' : 'Edit'}
+          </button>
+        </>
+      )}
+
       {state[name].map((value: string, index: number) => {
         let isLastInput = state[name].length - 1 === index;
 
@@ -80,7 +91,6 @@ export let InputGroup: FC<InputGroupProps> = ({
           </label>
         );
       })}
-
       <div className="input-group__button-wrapper--flex-end">
         <button
           type="button"

@@ -1,7 +1,7 @@
 # TODO
 
 - [x] Increase line height on text
-- [ ] Autofocus on last input in section when creating a new input
+- [x] Autofocus on last input in section when creating a new input
 - [ ] Add edit mode, to toggle delete buttons on and off so they're out of the way when not needed
 - [ ] Add autosave on change with debouncer
   - [ ] Remove required fields (and update API and models)
