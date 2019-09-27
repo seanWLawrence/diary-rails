@@ -8,6 +8,7 @@ interface InputGroupProps {
   setState: React.Dispatch<React.SetStateAction<{ [name: string]: any }>>;
   state: { [name: string]: any };
   required?: boolean;
+  groupName: string;
 }
 
 export let InputGroup: FC<InputGroupProps> = ({
@@ -16,6 +17,7 @@ export let InputGroup: FC<InputGroupProps> = ({
   name,
   label,
   required = false,
+  groupName,
 }) => {
   let [editMode, setEditMode] = useState<boolean>(false);
 
@@ -44,17 +46,24 @@ export let InputGroup: FC<InputGroupProps> = ({
     });
 
   let hasMoreThanOneInput = state[name].length > 1;
+
   let shouldDisplayRemoveButton = hasMoreThanOneInput && editMode;
 
   return (
     <>
-      {hasMoreThanOneInput && (
-        <>
-          <button onClick={() => setEditMode(!editMode)}>
+      <h2 className="input-group__title">
+        {groupName}
+
+        {hasMoreThanOneInput && (
+          <button
+            type="button"
+            onClick={() => setEditMode(!editMode)}
+            className="input-group__button--edit"
+          >
             {editMode ? 'Done' : 'Edit'}
           </button>
-        </>
-      )}
+        )}
+      </h2>
 
       {state[name].map((value: string, index: number) => {
         let isLastInput = state[name].length - 1 === index;

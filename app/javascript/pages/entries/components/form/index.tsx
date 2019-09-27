@@ -84,9 +84,8 @@ let EntryForm: FC<EntryFormProps> = ({ push, entry = defaultEntry }) => {
 
   return (
     <form className="entry-form__form" onSubmit={onSubmit(upsertEntry)}>
-      <h2 className="entry-form__title">Estoy agradecido por...</h2>
-
       <InputGroup
+        groupName="Estoy agradecido por..."
         name="gratitudes"
         setState={setEntryState}
         state={entryState}
@@ -94,9 +93,8 @@ let EntryForm: FC<EntryFormProps> = ({ push, entry = defaultEntry }) => {
         required
       />
 
-      <h2 className="entry-form__title">¿Qué haría grandioso hoy?</h2>
-
       <InputGroup
+        groupName="Qué haría grandioso hoy?"
         name="goals"
         setState={setEntryState}
         state={entryState}
@@ -104,31 +102,26 @@ let EntryForm: FC<EntryFormProps> = ({ push, entry = defaultEntry }) => {
         required
       />
 
-      <h2 className="entry-form__title">Estoy...</h2>
-
       <InputGroup
+        groupName="Estoy..."
         name="affirmations"
         setState={setEntryState}
         state={entryState}
         label="Affirma"
         required
       />
-
       {viewAllFields && (
         <>
-          <h2 className="entry-form__title">
-            Cosas increíbles que sucedieron hoy...
-          </h2>
           <InputGroup
+            groupName="Cosas increíbles que sucedieron hoy..."
             name="positiveExperiences"
             setState={setEntryState}
             state={entryState}
             label="Increible cosa"
           />
-          <h2 className="entry-form__title">
-            ¿Cómo podría haber mejorado aún más hoy?
-          </h2>
+
           <InputGroup
+            groupName="¿Cómo podría haber mejorado aún más hoy?"
             name="improvements"
             setState={setEntryState}
             state={entryState}

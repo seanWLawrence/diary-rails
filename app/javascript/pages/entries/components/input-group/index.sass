@@ -1,5 +1,14 @@
 @import '../../../../lib/index'
 
+.input-group__title
+  font-family: $font-family-serif
+  font-style: italic
+  font-weight: 400
+  font-size: 1.25rem
+  text-align: center
+  margin-bottom: 1em
+
+
 .input-group__label
   display: flex
   flex-direction: column
@@ -38,7 +47,7 @@
     justify-content: space-between
 
 .input-group__button
-  &--add, &--remove
+  &--add, &--remove, &--edit
     border: 0
     outline: 0
     font-size: .75rem
@@ -55,6 +64,9 @@
       background-color: transparentize($color-error, .9)
       box-shadow: 0 0 0 2px darken($color-error, 2.5%)
 
-  &--add:focus
+  &--add:focus, &--edit:focus
     background-color: transparentize($color-primary, .9)
     box-shadow: 0 0 0 2px darken($color-primary, 2.5%)
+
+  &--edit
+    margin-left: .5em
