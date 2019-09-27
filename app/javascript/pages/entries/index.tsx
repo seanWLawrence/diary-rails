@@ -54,6 +54,7 @@ let Entries: FC = () => {
                     affirmations,
                     positiveExperiences,
                     improvements,
+                    thingsLearned,
                     id,
                   },
                   index: number,
@@ -125,6 +126,15 @@ let Entries: FC = () => {
                               </h2>
 
                               <EntryValue values={improvements} />
+                            </>
+                          )}
+
+                          {hasItems(thingsLearned) && (
+                            <>
+                              <h2 className="entries__entry-title">
+                                Cosas aprendidas
+                              </h2>
+                              <EntryValue values={thingsLearned} />
                             </>
                           )}
                         </div>

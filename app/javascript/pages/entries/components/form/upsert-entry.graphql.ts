@@ -15,6 +15,7 @@ export default gql`
     $affirmations: [String!]!
     $positiveExperiences: [String!]
     $improvements: [String!]
+    $thingsLearned: [String!]
   ) {
     upsertEntry(
       id: $id
@@ -23,6 +24,7 @@ export default gql`
       affirmations: $affirmations
       positiveExperiences: $positiveExperiences
       improvements: $improvements
+      thingsLearned: $thingsLearned
     ) {
       errors
       success
@@ -33,6 +35,7 @@ export default gql`
         affirmations
         positiveExperiences
         improvements
+        thingsLearned
         dateCreated
       }
     }

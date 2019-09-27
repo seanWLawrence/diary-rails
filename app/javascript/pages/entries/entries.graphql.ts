@@ -14,6 +14,7 @@ export default gql`
       affirmations
       positiveExperiences
       improvements
+      thingsLearned
     }
   }
 `;

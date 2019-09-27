@@ -23,6 +23,7 @@ interface Entry {
   gratitudes: string[];
   improvements: string[];
   positiveExperiences: string[];
+  thingsLearned: string[];
 }
 
 interface EntryFormProps {
@@ -36,6 +37,7 @@ let defaultEntry = {
   gratitudes: [''],
   improvements: [''],
   positiveExperiences: [''],
+  thingsLearned: [''],
 };
 
 let EntryForm: FC<EntryFormProps> = ({ push, entry = defaultEntry }) => {
@@ -126,6 +128,14 @@ let EntryForm: FC<EntryFormProps> = ({ push, entry = defaultEntry }) => {
             setState={setEntryState}
             state={entryState}
             label="Mejorado"
+          />
+
+          <InputGroup
+            groupName="Cosas aprendidas"
+            name="thingsLearned"
+            setState={setEntryState}
+            state={entryState}
+            label="Cosa aprendida"
           />
         </>
       )}

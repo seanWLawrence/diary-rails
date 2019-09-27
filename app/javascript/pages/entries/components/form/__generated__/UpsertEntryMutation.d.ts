@@ -14,6 +14,7 @@ export interface UpsertEntryMutation_upsertEntry_entry {
   affirmations: string[];
   positiveExperiences: string[];
   improvements: string[];
+  thingsLearned: string[];
   dateCreated: string;
 }
 
@@ -35,4 +36,5 @@ export interface UpsertEntryMutationVariables {
   affirmations: string[];
   positiveExperiences?: string[] | null;
   improvements?: string[] | null;
+  thingsLearned?: string[] | null;
 }

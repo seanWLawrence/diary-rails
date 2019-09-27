@@ -6,6 +6,7 @@ module Mutations
     argument :affirmations, [String], required: true
     argument :positive_experiences, [String], required: false
     argument :improvements, [String], required: false
+    argument :things_learned, [String], required: false
 
     field :success, Boolean, null: false
     field :errors, [String], null: true
@@ -17,14 +18,16 @@ module Mutations
       goals:,
       affirmations: [],
       positive_experiences: [],
-      improvements: []
+      improvements: [],
+      things_learned: []
     )
       params = {
         gratitudes: gratitudes,
         goals: goals,
         affirmations: affirmations,
         positive_experiences: positive_experiences,
-        improvements: improvements
+        improvements: improvements,
+        things_learned: things_learned
       }
 
       if id

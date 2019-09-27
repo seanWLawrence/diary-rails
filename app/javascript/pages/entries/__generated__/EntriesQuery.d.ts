@@ -15,6 +15,7 @@ export interface EntriesQuery_entries {
   affirmations: string[];
   positiveExperiences: string[];
   improvements: string[];
+  thingsLearned: string[];
 }
 
 export interface EntriesQuery {
