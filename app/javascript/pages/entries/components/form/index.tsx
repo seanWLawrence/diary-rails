@@ -66,7 +66,11 @@ let EntryForm: FC<EntryFormProps> = ({ push, entry = defaultEntry }) => {
             ({ id }) => id !== upsertedEntry.id,
           );
 
-          data.entries = [...filteredEntries, upsertedEntry];
+          data.entries = [...filteredEntries, upsertedEntry].sort(
+            ({ dateCreated: a }, { dateCreated: b }) => {
+              return new Date(b).getTime() - new Date(a).getTime();
+            },
+          );
 
           cache.writeQuery({
             data,
